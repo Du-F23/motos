@@ -67,30 +67,40 @@
     <nav class="bottom-navbar">
         <div class="container">
             <ul class="nav page-navigation">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url('/')}}">
+                <li class="nav-item {{ Request::is('/dashboard') ? 'active' : ''}}">
+                    <a href="{{ url('/dashboard') }}" class="nav-link">
                         <i class="mdi mdi-file-document-box menu-icon"></i>
                         <span class="menu-title">
-                            Dashboard
+                            Inicio
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ Request::is('/categorias') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{route('categories.index')}}">
                         <i class="mdi mdi-cube-outline menu-icon"></i>
-                        <span class="menu-title">UI Elements</span>
+                        <span class="menu-title">Categorias</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="submenu">
-                        <ul>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="pages/ui-features/buttons.html">Buttons</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="pages/ui-features/typography.html">Typography</a></li>
-                        </ul>
-                    </div>
+{{--                    <div class="submenu">--}}
+{{--                        <ul>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link"--}}
+{{--                                   href="{{route('categories.store')}}">--}}
+{{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
+{{--                                    &nbsp;&nbsp;--}}
+{{--                                    Crear Categorias</a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link"--}}
+{{--                                   href="{{route('categories.index')}}">--}}
+{{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
+{{--                                    &nbsp;&nbsp;--}}
+{{--                                    Ver Categorias</a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('products*') ? 'active' : ''}}">
                     <a href="pages/forms/basic_elements.html" class="nav-link">
                         <i class="mdi mdi-chart-areaspline menu-icon"></i>
                         <span class="menu-title">Form Elements</span>
