@@ -29,6 +29,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/categorias/{id}/editar', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/categorias/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categorias/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::patch('/categorias/{id}/restaurar', [CategoryController::class, 'restore'])->name('categories.restore');
+
+    Route::get('/productos', [ProductsController::class, 'index'])->name('products.index');
+    Route::get('/productos/crear', [ProductsController::class, 'create'])->name('products.create');
+    Route::post('/productos/crear', [ProductsController::class, 'store'])->name('products.store');
+    Route::get('/productos/{id}/editar', [ProductsController::class, 'edit'])->name('products.edit');
+    Route::put('/productos/{id}', [ProductsController::class, 'update'])->name('products.update');
+    Route::delete('/productos/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
+    Route::patch('/productos/{id}/restaurar', [ProductsController::class, 'restore'])->name('products.restore');
+
+    Route::get('/motos', [MotosController::class, 'index'])->name('motos.index');
+    Route::get('/motos/crear', [MotosController::class, 'create'])->name('motos.create');
+    Route::post('/motos/crear', [MotosController::class, 'store'])->name('motos.store');
+    Route::get('/motos/{id}/editar', [MotosController::class, 'edit'])->name('motos.edit');
+    Route::put('/motos/{id}', [MotosController::class, 'update'])->name('motos.update');
+    Route::delete('/motos/{id}', [MotosController::class, 'destroy'])->name('motos.destroy');
+    Route::patch('/motos/{id}/restaurar', [MotosController::class, 'restore'])->name('motos.restore');
 });
 
 require __DIR__ . '/auth.php';

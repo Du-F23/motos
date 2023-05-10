@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements("id");
-            $table->string("marca");
-            $table->string("model");
-            $table->date("date");
-            $table->text("image");
-            $table->boolean('active')->default(true);
-            $table->foreignId('moto_id')->constrained('motos');
+        Schema::create('motos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->text('name');
+            $table->text('marca');
+            $table->text('model');
+            $table->text('year');
+            $table->text('hp');
+            $table->text('color');
+            $table->text('image')->nullable();
+            $table->foreignId('category_id')->constrained('categories');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('motos');
     }
 };

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -14,7 +13,9 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('categories.index', compact('categories'));
+        $categoriesDeleted = Category::onlyTrashed()->get();
+
+        return view('categories.index', compact('categories', 'categoriesDeleted'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -61,9 +62,25 @@ class CategoryController extends Controller
     public function destroy($id): RedirectResponse
     {
         $category = Category::find($id);
+        //inactiva la categoria cambiando el valor de active a false
+        $category->update([
+            'active' => false,
+        ]);
 
         $category->delete();
 
         return redirect()->route('categories.index')->with('delete', 'Category deleted successfully.');
+    }
+
+    public function restore($id): RedirectResponse
+    {
+        $category = Category::onlyTrashed()->find($id);
+        //activa la categoria cambiando el valor de active a true
+        $category->update([
+            'active' => true,
+        ]);
+        $category->restore();
+
+        return redirect()->route('categories.index')->with('success', 'Category restored successfully.');
     }
 }
