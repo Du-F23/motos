@@ -122,7 +122,7 @@
                             </div>
                         </div>
                         {{--                            categorias borradas--}}
-                        @if($categoriesDeleted)
+                        @if($categoriesDeleted->count() !== 0)
                         <div class="col-lg-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">

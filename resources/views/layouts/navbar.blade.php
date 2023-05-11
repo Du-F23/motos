@@ -100,10 +100,10 @@
 {{--                        </ul>--}}
 {{--                    </div>--}}
                 </li>
-                <li class="nav-item {{ Request::is('products*') ? 'active' : ''}}">
-                    <a href="pages/forms/basic_elements.html" class="nav-link">
+                <li class="nav-item {{ Request::is('/motos/') ? 'active' : ''}}">
+                    <a href="{{route('motos.index')}}" class="nav-link">
                         <i class="mdi mdi-chart-areaspline menu-icon"></i>
-                        <span class="menu-title">Form Elements</span>
+                        <span class="menu-title">Motos</span>
                         <i class="menu-arrow"></i>
                     </a>
                 </li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Motos;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use App\Models\Category;
 
@@ -12,7 +13,7 @@ class MotosController extends Controller
 {
     public function index(): View
     {
-        $motos = Motos::all();
+        $motos = Motos::with('category')->get();
         $motosDeleted = Motos::onlyTrashed()->get();
 
         return view('motos.index', compact('motos', 'motosDeleted'));
@@ -22,19 +23,18 @@ class MotosController extends Controller
     {
         $categories = Category::all();
 
-        return view('categories.create', compact('categories'));
+        return view('motos.create', compact('categories'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //recibe la imagen y la guarda en el storage publico
         $image = $request->file('image')->storeAs('public/motos', time(). '_' . $request->name . '_' . $request->file('image')->getClientOriginalName());
-        // quita la palabra public del path
+        //reemplaza la palabra public/ por vacio
         $image = str_replace('public/', '', $image);
 
         $motos = Motos::create([
             'name' => $request->name,
-            'marca' => $request->marca,
             'year' => $request->year,
             'model' => $request->model,
             'color' => $request->color,
@@ -88,4 +88,5 @@ class MotosController extends Controller
 
         return redirect()->route('motos.index')->with('success', 'Moto restored successfully.');
     }
+
 }

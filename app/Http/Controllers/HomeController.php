@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Products;
+use App\Models\Motos;
 use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
@@ -18,6 +20,9 @@ class HomeController extends Controller
 
     public function dashboard(): View
     {
-        return view('dashboard');
+        $categories = Category::all();
+        $motos = Motos::all();
+
+        return view('dashboard', compact('motos', 'categories'));
     }
 }
