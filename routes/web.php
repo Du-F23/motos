@@ -42,10 +42,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/motos', [MotosController::class, 'index'])->name('motos.index');
     Route::get('/motos/crear', [MotosController::class, 'create'])->name('motos.create');
     Route::post('/motos/crear', [MotosController::class, 'store'])->name('motos.store');
+    Route::get('/motos/{id}', [MotosController::class, 'show'])->name('motos.show');
     Route::get('/motos/{id}/editar', [MotosController::class, 'edit'])->name('motos.edit');
     Route::put('/motos/{id}', [MotosController::class, 'update'])->name('motos.update');
     Route::delete('/motos/{id}', [MotosController::class, 'destroy'])->name('motos.destroy');
     Route::patch('/motos/{id}/restaurar', [MotosController::class, 'restore'])->name('motos.restore');
+    Route::delete('/motos/{id}/force', [MotosController::class, 'forceDelete'])->name('motos.forceDelete');
 });
 
 require __DIR__ . '/auth.php';

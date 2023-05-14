@@ -14,7 +14,7 @@ class MotosController extends Controller
     public function index(): View
     {
         $motos = Motos::with('category')->get();
-        $motosDeleted = Motos::onlyTrashed()->get();
+        $motosDeleted = Motos::onlyTrashed()->with('category')->get();
 
         return view('motos.index', compact('motos', 'motosDeleted'));
     }
@@ -48,7 +48,11 @@ class MotosController extends Controller
 
     public function show($id)
     {
-        //
+        //busca por id en la tabla motos ya sea en las eliminadas o no
+        //recupera de los headers si esta eliminada o no
+        $moto = Motos::withTrashed()->find($id);
+
+        return response()->json($moto);
     }
 
     public function edit($id): View
@@ -87,6 +91,15 @@ class MotosController extends Controller
         $moto->restore();
 
         return redirect()->route('motos.index')->with('success', 'Moto restored successfully.');
+    }
+
+    public function forceDelete($id): RedirectResponse
+    {
+        $moto = Motos::onlyTrashed()->find($id);
+        Storage::delete('public/' . $moto->image);
+        $moto->forceDelete();
+
+        return redirect()->route('motos.index')->with('success', 'Moto deleted successfully.');
     }
 
 }

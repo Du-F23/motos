@@ -25,6 +25,7 @@
     <script src="{{("assets/vendors/justgage/raphael-2.1.4.min.js")}}"></script>
     <script src="{{("assets/vendors/justgage/justgage.js")}}"></script>
     <script src="{{("assets/js/jquery.cookie.js")}}" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="{{("assets/js/dashboard.js")}}"></script>
 </body>
 
