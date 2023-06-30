@@ -2,7 +2,8 @@
 
 @section('title', 'Dashboard')
 @section('content')
-    <div class="container-scroller">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <div class="container-scroller bg-black" id="body">
         <div class="container-fluid page-body-wrapper">
             <div class="main-panel">
                 <div class="content-wrapper">
@@ -16,7 +17,8 @@
                                             <h4 class="text-center text-white">Motos</h4>
                                         </div>
                                         <div class="col-4">
-                                            <select class="form-control" aria-label="Default select example" id="category">
+                                            <select class="form-control" aria-label="Default select example"
+                                                    id="category">
                                                 <option selected>Selecciona una categoria</option>
                                                 @foreach($categories as $category)
                                                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -28,22 +30,43 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row" id="showMotosByCategory">
                                     @foreach($motos as $moto)
                                         <div class="card" style="width: 18rem;">
                                             <img src="{{asset('storage').'/'.$moto->image}}" class="card-img-top"
                                                  alt="{{$moto->name}}">
                                             <div class="card-body">
-                                                <h5 class="card-title">{{$moto->name}}</h5>
+                                                <h5 class="card-title">{{$moto->name}} {{$moto->model}}</h5>
                                                 <a href="#" class="btn btn-primary">Go somewhere</a>
                                             </div>
                                         </div>
+                                        <br>
+                                        <br>
+                                        <br>
                                     @endforeach
+                                    <br>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <script type="application/javascript">
+                    $(document).ready(function () {
+                        $('#category').on('change', function () {
+                            $.ajax({
+                                url: "/motosByCategory/" + this.value,
+                                type: "POST",
+                                data: {
+                                    "_token": "{{ csrf_token() }}",
+                                },
+                                success: function (data) {
+                                    //si la respuesta del servidor es exitosa se ejecuta esta funcion y se muestra el resultado
+                                    $('#showMotosByCategory').html(data);
+                                }
+                            });
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>

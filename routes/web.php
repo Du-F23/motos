@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Motos;
 use Illuminate\Support\Facades\Route;
+use QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,22 +35,33 @@ Route::middleware('auth')->group(function () {
     Route::patch('/categorias/{id}/restaurar', [CategoryController::class, 'restore'])->name('categories.restore');
 
     Route::get('/productos', [ProductsController::class, 'index'])->name('products.index');
-    Route::get('/productos/crear', [ProductsController::class, 'create'])->name('products.create');
-    Route::post('/productos/crear', [ProductsController::class, 'store'])->name('products.store');
+    Route::get('/productos/create', [ProductsController::class, 'create'])->name('products.create');
+    Route::get('/productos/{id}', [ProductsController::class, 'show'])->name('products.show');
+    Route::post('/productos/store', [ProductsController::class, 'store'])->name('products.store');
     Route::get('/productos/{id}/editar', [ProductsController::class, 'edit'])->name('products.edit');
     Route::put('/productos/{id}', [ProductsController::class, 'update'])->name('products.update');
     Route::delete('/productos/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
     Route::patch('/productos/{id}/restaurar', [ProductsController::class, 'restore'])->name('products.restore');
+    Route::delete('/productos/{id}/force', [ProductsController::class, 'forceDelete'])->name('products.forceDelete');
 
     Route::get('/motos', [MotosController::class, 'index'])->name('motos.index');
     Route::get('/motos/crear', [MotosController::class, 'create'])->name('motos.create');
     Route::post('/motos/crear', [MotosController::class, 'store'])->name('motos.store');
-    Route::get('/motos/{id}', [MotosController::class, 'show'])->name('motos.show');
+    Route::get('/motos/{id}/json', [MotosController::class, 'showJson'])->name('motos.showJson');
+    Route::get('/motos/{id}/show', [MotosController::class, 'show'])->name('motos.show');
     Route::get('/motos/{id}/editar', [MotosController::class, 'edit'])->name('motos.edit');
     Route::put('/motos/{id}', [MotosController::class, 'update'])->name('motos.update');
     Route::delete('/motos/{id}', [MotosController::class, 'destroy'])->name('motos.destroy');
     Route::patch('/motos/{id}/restaurar', [MotosController::class, 'restore'])->name('motos.restore');
     Route::delete('/motos/{id}/force', [MotosController::class, 'forceDelete'])->name('motos.forceDelete');
+    Route::post('/motosByCategory/{id}', [MotosController::class, 'showByCategory'])->name('motos.motosByCategory');
+    Route::get('/motos/{id}/pieces', [MotosController::class, 'findPieces'])->name('motos.pieces');
+});
+
+Route::get('qrcode', function () {
+    $categories = Category::all();
+    $pdf = PDF::loadView('pdf_view', $categories);
+    return $pdf->download('pdf_file.pdf');
 });
 
 require __DIR__ . '/auth.php';

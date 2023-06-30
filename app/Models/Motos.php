@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Motos extends Model
@@ -26,22 +27,8 @@ class Motos extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function scopeName($query, $name)
+    public function products(): HasMany
     {
-        if ($name) {
-            return $query->where('name', 'LIKE', "%$name%");
-        }
-
-        return $query;
-    }
-
-    //busca por categoria usando el id
-    public function scopeCategory($query, $category_id)
-    {
-        if ($category_id) {
-            return $query->where('category_id', $category_id);
-        }
-
-        return $query;
+        return $this->hasMany(Products::class, 'moto_id');
     }
 }

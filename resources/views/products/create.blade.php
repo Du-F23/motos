@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Crear Motos')
+@section('title', 'Crear Productos')
 
 @section('content')
     <div class="container-scroller">
@@ -11,59 +11,30 @@
                             <div class="card">
                                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                     <div class="bg-gradient-primary shadow-primary rounded pt-4 pb-3">
-                                        <h6 class="text-white text-capitalize ps-3">Crear Moto</h6>
+                                        <h6 class="text-white text-capitalize ps-3">Crear Productos</h6>
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="container-fluid">
-                                            <form action="{{route('motos.store')}}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="mb-3">
-                                                            <label for="name" class="form-label">Nombre</label>
-                                                            <input type="text" class="form-control" id="name"
-                                                                   placeholder="Italika" name="name"
-                                                                   value="{{old('name')}}">
-                                                            @error('name')
+                                                            <label for="marca" class="form-label">Marca</label>
+                                                            <input type="text" class="form-control" id="marca"
+                                                                   placeholder="Marca" name="marca"
+                                                                   value="{{old('marca')}}">
+                                                            @error('marca')
                                                             <div class="text-danger">{{ $message }}</div>
                                                             @enderror
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="model" class="form-label">Modelo</label>
-                                                            <input type="text" class="form-control" id="model"
-                                                                   placeholder="RT200 GP" name="model" value="{{old('model')}}">
-                                                            @error('model')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="year" class="form-label">Año</label>
-                                                            <select class="form-select"
-                                                                    aria-label="Seleccionar Año de fabricación de la Moto" name="year">
-                                                                <option selected>Seleccione una opcion</option>
-                                                                <option value="2002">2002</option>
-                                                                <option value="2003">2003</option>
-                                                                <option value="2004">2004</option>
-                                                            </select>
-                                                            @error('year')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="cilindraje" class="form-label">Cilindraje</label>
-                                                            <input type="text" class="form-control" id="cilindraje"
-                                                                   placeholder="200 C.C." name="hp" value="{{old('hp')}}">
-                                                            @error('hp')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="color" class="form-label">Color</label>
-                                                            <input type="text" class="form-control" id="color"
-                                                                   placeholder="Azul Metalico" name="color" value="{{old('color')}}">
-                                                            @error('color')
+                                                            <label for="piece" class="form-label">Piece</label>
+                                                            <input type="text" class="form-control" id="piece"
+                                                                   placeholder="Pieza" name="piece" value="{{old('piece')}}">
+                                                            @error('piece')
                                                             <div class="text-danger">{{ $message }}</div>
                                                             @enderror
                                                         </div>
@@ -75,22 +46,22 @@
                                                             @enderror
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="category_id" class="form-label">Categoria</label>
+                                                            <label for="moto_id" class="form-label">Moto Compatible</label>
                                                             <select class="form-select"
-                                                                    aria-label="Seleccionar Categoria de la Moto" name="category_id">
+                                                                    aria-label="Seleccionar Categoria de la Moto" name="moto_id">
                                                                 <option selected>Seleccione una opcion</option>
-                                                                @foreach($categories as $category)
+                                                                @foreach($motos as $moto)
                                                                     <option
-                                                                        value="{{$category->id}}">{{$category->name}}</option>
+                                                                        value="{{$moto->id}}">{{$moto->name}} {{$moto->model}}</option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('category_id')
+                                                            @error('moto_id')
                                                             <div class="text-danger">{{ $message }}</div>
                                                             @enderror
                                                         </div>
                                                         <div class="mb-3">
                                                             <button type="submit" class="btn btn-primary">Guardar</button>
-                                                            <a href="{{route('motos.index')}}" class="btn btn-danger text-white">Cancelar</a>
+                                                            <a href="{{route('products.index')}}" class="btn btn-danger text-white">Cancelar</a>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">

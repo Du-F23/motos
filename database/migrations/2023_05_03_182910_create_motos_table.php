@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('motos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('name');
-            $table->text('marca');
             $table->text('model');
             $table->text('year');
             $table->text('hp');

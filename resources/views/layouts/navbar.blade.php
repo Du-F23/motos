@@ -7,15 +7,12 @@
                             src="{{ asset('assets/images/logo.sv') }}g" alt="logo"/></a>
                     <a class="navbar-brand brand-logo-mini" href="{{ url('/') }}"><img
                             src="{{ asset('assets/images/logo-mini.svg') }}" alt="logo"/></a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1 text-dark">{{config('app.name')}}</h4>
                 </div>
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item dropdown  d-lg-flex d-none">
-
                     </li>
                     <li class="nav-item dropdown d-lg-flex d-none">
-
                     </li>
                     @if (!Auth::check())
                         <li class="nav-item dropdown d-lg-flex d-none">
@@ -81,41 +78,59 @@
                         <span class="menu-title">Categorias</span>
                         <i class="menu-arrow"></i>
                     </a>
-{{--                    <div class="submenu">--}}
-{{--                        <ul>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link"--}}
-{{--                                   href="{{route('categories.store')}}">--}}
-{{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
-{{--                                    &nbsp;&nbsp;--}}
-{{--                                    Crear Categorias</a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link"--}}
-{{--                                   href="{{route('categories.index')}}">--}}
-{{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
-{{--                                    &nbsp;&nbsp;--}}
-{{--                                    Ver Categorias</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="submenu">--}}
+                    {{--                        <ul>--}}
+                    {{--                            <li class="nav-item">--}}
+                    {{--                                <a class="nav-link"--}}
+                    {{--                                   href="{{route('categories.store')}}">--}}
+                    {{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
+                    {{--                                    &nbsp;&nbsp;--}}
+                    {{--                                    Crear Categorias</a>--}}
+                    {{--                            </li>--}}
+                    {{--                            <li class="nav-item">--}}
+                    {{--                                <a class="nav-link"--}}
+                    {{--                                   href="{{route('categories.index')}}">--}}
+                    {{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
+                    {{--                                    &nbsp;&nbsp;--}}
+                    {{--                                    Ver Categorias</a>--}}
+                    {{--                            </li>--}}
+                    {{--                        </ul>--}}
+                    {{--                    </div>--}}
                 </li>
-                <li class="nav-item {{ Request::is('/motos/') ? 'active' : ''}}">
+                <li class="nav-item {{ Request::is('/motos') ? 'active' : ''}} {{ Request::is('/motos/*/show') ? 'active' : ''}}">
                     <a href="{{route('motos.index')}}" class="nav-link">
                         <i class="mdi mdi-chart-areaspline menu-icon"></i>
                         <span class="menu-title">Motos</span>
                         <i class="menu-arrow"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="pages/charts/chartjs.html" class="nav-link">
-                        <i class="mdi mdi-finance menu-icon"></i>
-                        <span class="menu-title">Charts</span>
+                <li class="nav-item {{ Request::is('/productos') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{route('products.index')}}">
+                        <i class="mdi mdi-store menu-icon"></i>
+                        <span class="menu-title">Productos</span>
                         <i class="menu-arrow"></i>
                     </a>
+                    {{--                    <div class="submenu">--}}
+                    {{--                        <ul>--}}
+                    {{--                            <li class="nav-item">--}}
+                    {{--                                <a class="nav-link"--}}
+                    {{--                                   href="{{route('categories.store')}}">--}}
+                    {{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
+                    {{--                                    &nbsp;&nbsp;--}}
+                    {{--                                    Crear Categorias</a>--}}
+                    {{--                            </li>--}}
+                    {{--                            <li class="nav-item">--}}
+                    {{--                                <a class="nav-link"--}}
+                    {{--                                   href="{{route('categories.index')}}">--}}
+                    {{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
+                    {{--                                    &nbsp;&nbsp;--}}
+                    {{--                                    Ver Categorias</a>--}}
+                    {{--                            </li>--}}
+                    {{--                        </ul>--}}
+                    {{--                    </div>--}}
                 </li>
                 <li class="nav-item">
-                    <a href="pages/tables/basic-table.html" class="nav-link">
+                    <a href="{{ url('/productos') }}" class="nav-link">
                         <i class="mdi mdi-grid menu-icon"></i>
                         <span class="menu-title">Tables</span>
                         <i class="menu-arrow"></i>

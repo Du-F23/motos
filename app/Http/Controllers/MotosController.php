@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Motos;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -26,15 +27,26 @@ class MotosController extends Controller
         return view('motos.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'year' => ['required'],
+            'model' => ['required', 'string'],
+            'color' => ['required', 'string'],
+            'hp' => ['required', 'string'],
+            'image' => ['required', 'file'],
+            'category_id' => ['required', 'exists:' . Category::class . ',id']
+        ]);
+
         //recibe la imagen y la guarda en el storage publico
-        $image = $request->file('image')->storeAs('public/motos', time(). '_' . $request->name . '_' . $request->file('image')->getClientOriginalName());
+        $image = $request->file('image')->storeAs('public/motos', time() . '_' . $request->name . '_' . $request->file('image')->getClientOriginalName());
         //reemplaza la palabra public/ por vacio
         $image = str_replace('public/', '', $image);
 
-        $motos = Motos::create([
+        Motos::create([
             'name' => $request->name,
+            'marca' => $request->marca,
             'year' => $request->year,
             'model' => $request->model,
             'color' => $request->color,
@@ -46,7 +58,7 @@ class MotosController extends Controller
         return redirect()->route('motos.index')->with('success', 'Moto created successfully.');
     }
 
-    public function show($id)
+    public function showJson($id): JsonResponse
     {
         //busca por id en la tabla motos ya sea en las eliminadas o no
         //recupera de los headers si esta eliminada o no
@@ -55,9 +67,18 @@ class MotosController extends Controller
         return response()->json($moto);
     }
 
+    public function show($id)
+    {
+        $moto=Motos::with('category')->find($id);
+        $pieces=Motos::with('products')->find($id);
+        $pieces=$pieces->products;
+
+        return view('motos.show', compact('moto', 'pieces'));
+    }
+
     public function edit($id): View
     {
-        $moto = Motos::find($id);
+        $moto = Motos::with('category')->find($id);
         $categories = Category::all();
 
         return view('motos.edit', compact('moto', 'categories'));
@@ -67,7 +88,7 @@ class MotosController extends Controller
     {
         $moto = Motos::find($id);
         if ($request->file('image')) {
-            $image = $request->file('image')->storeAs('public/motos', time(). '_' . $request->name . '_' . $request->file('image')->getClientOriginalName());
+            $image = $request->file('image')->storeAs('public/motos', time() . '_' . $request->name . '_' . $request->file('image')->getClientOriginalName());
             $image = str_replace('public/', '', $image);
             $moto->image = $image;
             $moto->update($request->all());
@@ -102,4 +123,17 @@ class MotosController extends Controller
         return redirect()->route('motos.index')->with('success', 'Moto deleted successfully.');
     }
 
+    public function showByCategory($id)
+    {
+        $motos = Motos::where('category_id', $id)->get();
+        return view('motos.filtered', compact('motos'));
+    }
+
+    public function findPieces($id)
+    {
+        $pieces=Motos::with('products')->find($id);
+        $pieces=$pieces->products;
+
+        return response()->json($pieces);
+    }
 }

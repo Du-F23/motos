@@ -2,83 +2,96 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Motos;
+use App\Models\Products;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): View
     {
-        //
+        $products = Products::with('motos')->paginate(25);
+
+//        return response()->json($products);
+        return view('products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $motos = Motos::all();
+
+        return view('products.create', compact('motos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'marca' => ['required', 'string'],
+            'piece' => ['required', 'string'],
+            'image' => ['required', 'file'],
+            'moto_id' => ['required', 'exists:' . Motos::class . ',id']
+        ]);
+//        dd($request->all());
+//
+        $piece = str_replace(' ', '', $request->piece);
+//        dd($piece);
+        //recibe la imagen y la guarda en el storage publico
+        $image = $request->file('image')->storeAs('public/products', time() . '_' . $request->marca . $piece . '_' . $request->file('image')->getClientOriginalName());
+        //reemplaza la palabra public/ por vacio
+        $image = str_replace('public/', '', $image);
+
+        Products::create([
+            'marca' => $request->marca,
+            'piece' => $request->piece,
+            'image' => $image,
+            'active' => 1,
+            'moto_id' => $request->moto_id
+        ]);
+
+        return redirect()->route('products.index')->with('success', 'Product created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $product=Products::find($id);
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
+
+    public function restore($id): RedirectResponse
+    {
+        $product = Products::onlyTrashed()->find($id);
+        $product->restore();
+
+        return redirect()->route('motos.index')->with('success', 'Product restored successfully.');
+    }
+
+    public function forceDelete($id): RedirectResponse
+    {
+        $product = Products::onlyTrashed()->find($id);
+        Storage::delete('public/' . $product->image);
+        $product->forceDelete();
+
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+    }
+
 }

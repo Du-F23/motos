@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Parts extends Model
@@ -19,4 +20,9 @@ class Parts extends Model
         'active',
         'product_id',
     ];
+
+    public function products(): BelongsTo
+    {
+        return $this->belongsTo(Products::class);
+    }
 }
