@@ -32,7 +32,7 @@
                                                     <th>Marca</th>
                                                     <th>Pieza</th>
                                                     <th>Estatus</th>
-                                                    <th>Moto Compatible</th>
+                                                    <th>Motos Compatibles</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                                 </thead>
@@ -56,7 +56,12 @@
                                                                 <label class="badge badge-danger">Inactivo</label>
                                                             @endif
                                                         </td>
-                                                        <td>{{$product->motos->name}} {{$product->motos->model}}, Cilindraje {{$product->motos->hp}} CC</td>
+                                                        <td>
+                                                            @foreach($product->moto as $motos)
+                                                                {{$motos->name}} {{$motos->model}}, Cilindraje {{$motos->hp}} CC
+                                                                <br>
+                                                            @endforeach
+                                                        </td>
 
                                                         <td>
                                                             <a type="button"

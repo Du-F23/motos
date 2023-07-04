@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -17,12 +18,21 @@ class Products extends Model
         'piece',
         'image',
         'active',
-        'moto_id'
     ];
 
-    public function motos(): BelongsTo
+//    public function motos(): BelongsTo
+//    {
+//        return $this->belongsTo(Motos::class, 'motos_id');
+//    }
+    public function moto()
     {
-        return $this->belongsTo(Motos::class, 'moto_id');
+        return $this->belongsToMany(Motos::class, 'product_moto', 'product_id', 'moto_id')
+            ->withPivot('id');
+    }
+
+    public function motos()
+    {
+        return $this->belongsToMany(Motos::class, 'product_moto', 'product_id', 'moto_id');
     }
 
     public function parts()

@@ -47,8 +47,8 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="moto_id" class="form-label">Moto Compatible</label>
-                                                            <select class="form-select"
-                                                                    aria-label="Seleccionar Categoria de la Moto" name="moto_id">
+                                                            <select class="form-select js-example-basic-multiple"
+                                                                    aria-label="Seleccionar Categoria de la Moto" name="moto_id[]" multiple="multiple">
                                                                 <option selected>Seleccione una opcion</option>
                                                                 @foreach($motos as $moto)
                                                                     <option
@@ -100,6 +100,9 @@
                                                                         preview.append(image);
                                                                     };
                                                                 }
+                                                                $(document).ready(function() {
+                                                                    $('.js-example-basic-multiple').select2();
+                                                                });
                                                             </script>
                                                         </div>
                                                     </div>
@@ -115,4 +118,6 @@
             </div>
         </div>
     </div>
+    <link rel="stylesheet" href="../../vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="../../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
 @endsection

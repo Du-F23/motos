@@ -129,13 +129,13 @@
                     {{--                        </ul>--}}
                     {{--                    </div>--}}
                 </li>
-                <li class="nav-item">
-                    <a href="{{ url('/productos') }}" class="nav-link">
-                        <i class="mdi mdi-grid menu-icon"></i>
-                        <span class="menu-title">Tables</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a href="{{ url('/productos') }}" class="nav-link">--}}
+{{--                        <i class="mdi mdi-grid menu-icon"></i>--}}
+{{--                        <span class="menu-title">Tables</span>--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
                 <li class="nav-item">
                     <a href="pages/icons/mdi.html" class="nav-link">
                         <i class="mdi mdi-emoticon menu-icon"></i>

@@ -17,16 +17,17 @@
 @include('layouts.navbar')
 @yield('content')
 @include('layouts.footer')
-<script src="{{("assets/vendors/base/vendor.bundle.base.js")}}"></script>
-<script src="{{("assets/js/template.js")}}"></script>
-<script src="{{("assets/vendors/chart.js/Chart.min.js")}}"></script>
-<script src="{{("assets/vendors/progressbar.js/progressbar.min.js")}}"></script>
-<script src="{{("assets/vendors/chartjs-plugin-datalabels/chartjs-plugin-datalabels.js")}}"></script>
-<script src="{{("assets/vendors/justgage/raphael-2.1.4.min.js")}}"></script>
-<script src="{{("assets/vendors/justgage/justgage.js")}}"></script>
-<script src="{{("assets/js/jquery.cookie.js")}}" type="text/javascript"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="{{("assets/js/dashboard.js")}}"></script>
+<script src="{{asset("assets/vendors/base/vendor.bundle.base.js")}}"></script>
+<script src="{{asset("assets/js/template.js")}}"></script>
+<script src="{{asset("assets/vendors/chart.js/Chart.min.js")}}"></script>
+<script src="{{asset("assets/vendors/progressbar.js/progressbar.min.js")}}"></script>
+<script src="{{asset("assets/vendors/chartjs-plugin-datalabels/chartjs-plugin-datalabels.js")}}"></script>
+<script src="{{asset("assets/vendors/justgage/raphael-2.1.4.min.js")}}"></script>
+<script src="{{asset("assets/vendors/justgage/justgage.js")}}"></script>
+<script src="{{asset("assets/js/jquery.cookie.js")}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/jquery-3.6.4.min.js')}}"></script>
+<script src="{{asset("assets/js/dashboard.js")}}"></script>
+
 </body>
 
 </html>

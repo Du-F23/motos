@@ -11,9 +11,9 @@ use Illuminate\View\View;
 
 class ProductsController extends Controller
 {
-    public function index(): View
+    public function index()
     {
-        $products = Products::with('motos')->paginate(25);
+        $products = Products::with('moto')->paginate(25);
 
 //        return response()->json($products);
         return view('products.index', compact('products'));
@@ -32,7 +32,6 @@ class ProductsController extends Controller
             'marca' => ['required', 'string'],
             'piece' => ['required', 'string'],
             'image' => ['required', 'file'],
-            'moto_id' => ['required', 'exists:' . Motos::class . ',id']
         ]);
 //        dd($request->all());
 //
@@ -43,13 +42,13 @@ class ProductsController extends Controller
         //reemplaza la palabra public/ por vacio
         $image = str_replace('public/', '', $image);
 
-        Products::create([
+        $product = Products::create([
             'marca' => $request->marca,
             'piece' => $request->piece,
             'image' => $image,
             'active' => 1,
-            'moto_id' => $request->moto_id
         ]);
+        $product->motos()->attach($request->moto_id);
 
         return redirect()->route('products.index')->with('success', 'Product created successfully');
     }

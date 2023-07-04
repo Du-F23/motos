@@ -17,10 +17,8 @@ return new class extends Migration
             $table->bigIncrements("id");
             $table->string("marca");
             $table->string("piece");
-            //$table->date("date");
             $table->text("image");
             $table->boolean('active')->default(true);
-            $table->foreignId('moto_id')->constrained('motos');
             $table->softDeletes();
             $table->timestamps();
         });
