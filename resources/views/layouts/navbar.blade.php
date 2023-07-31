@@ -7,7 +7,7 @@
                             src="{{ asset('assets/images/logo.sv') }}g" alt="logo"/></a>
                     <a class="navbar-brand brand-logo-mini" href="{{ url('/') }}"><img
                             src="{{ asset('assets/images/logo-mini.svg') }}" alt="logo"/></a>
-                    <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1 text-dark">{{config('app.name')}}</h4>
+                    <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1 text-white">&nbsp;&nbsp;{{config('app.name')}}</h4>
                 </div>
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item dropdown  d-lg-flex d-none">

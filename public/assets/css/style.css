@@ -8706,6 +8706,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+    color: #ffffff;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -8744,6 +8745,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
+    background: transparent;
 }
 
 h1, .h1 {
@@ -8876,11 +8878,13 @@ sup {
 
 a {
   color: #0d6efd;
+    background: transparent;
   text-decoration: underline;
 }
 
 a:hover {
   color: #0a58ca;
+    background: transparent;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -9291,6 +9295,8 @@ progress {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+    background: #000b1f;
+
 }
 
 @media (min-width: 576px) {
@@ -9331,6 +9337,8 @@ progress {
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-.5 * var(--bs-gutter-x));
   margin-left: calc(-.5 * var(--bs-gutter-x));
+    background: transparent;
+
 }
 
 .row > * {
@@ -9384,66 +9392,83 @@ progress {
 .col-auto {
   flex: 0 0 auto;
   width: auto;
+    background: transparent;
 }
 
 .col-1 {
   flex: 0 0 auto;
   width: 8.33333%;
+    background: transparent;
 }
 
 .col-2 {
   flex: 0 0 auto;
   width: 16.66667%;
+    background: transparent;
 }
 
 .col-3 {
   flex: 0 0 auto;
   width: 25%;
+    background: transparent;
 }
 
 .col-4 {
   flex: 0 0 auto;
   width: 33.33333%;
+    background: transparent;
 }
 
 .col-5 {
   flex: 0 0 auto;
   width: 41.66667%;
+    background: transparent;
 }
 
 .col-6 {
   flex: 0 0 auto;
   width: 50%;
+    background: transparent;
 }
 
 .col-7 {
   flex: 0 0 auto;
   width: 58.33333%;
+    background: transparent;
 }
 
 .col-8 {
   flex: 0 0 auto;
   width: 66.66667%;
+    background: transparent;
 }
 
 .col-9 {
   flex: 0 0 auto;
   width: 75%;
+    background: transparent;
+
 }
 
 .col-10 {
   flex: 0 0 auto;
   width: 83.33333%;
+    background: transparent;
+
 }
 
 .col-11 {
   flex: 0 0 auto;
   width: 91.66667%;
+    background: transparent;
+
 }
 
 .col-12 {
   flex: 0 0 auto;
   width: 100%;
+    background: transparent;
+
 }
 
 .offset-1 {
@@ -10650,7 +10675,7 @@ progress {
   font-weight: 400;
   line-height: 1;
   color: #212529;
-  background-color: color(white);
+  background-color: #000b1a;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   appearance: none;
@@ -10747,9 +10772,9 @@ progress {
   padding: 0.875rem 1.375rem;
   margin: -0.875rem -1.375rem;
   margin-inline-end: 1.375rem;
-  color: #212529;
-  background-color: #e9ecef;
-  pointer-events: none;
+  color: #ffffff;
+    background: #000b1a;
+    pointer-events: none;
   border-color: inherit;
   border-style: solid;
   border-width: 0;
@@ -10869,8 +10894,8 @@ textarea.form-control-lg {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
+  color: #ffffff;
+    background: #000b1a;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
@@ -10890,7 +10915,9 @@ textarea.form-control-lg {
 .form-select:focus {
   border-color: #86b7fe;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    background-color: #000b1a;
+    color: #ffff;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
 .form-select[multiple], .form-select[size]:not([size="1"]) {
@@ -10928,6 +10955,7 @@ textarea.form-control-lg {
   min-height: 1.5rem;
   padding-left: 1.5em;
   margin-bottom: 0.125rem;
+    background: transparent;
 }
 
 .form-check .form-check-input {
@@ -10951,6 +10979,7 @@ textarea.form-control-lg {
 
 .form-check-input[type="checkbox"] {
   border-radius: 0.25em;
+    background: transparent;
 }
 
 .form-check-input[type="radio"] {
@@ -12468,17 +12497,17 @@ fieldset:disabled .btn {
   padding: 0.25rem 1rem;
   clear: both;
   font-weight: 400;
-  color: #6c7293;
+  color: #fff;
   text-align: inherit;
   text-decoration: none;
   white-space: nowrap;
-  background-color: transparent;
+  background-color: #000b1a;
   border: 0;
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
-  color: #1e2125;
-  background-color: #eaeaf1;
+  color: #fff;
+  background-color: #000b1f;
 }
 
 .dropdown-item.active, .dropdown-item:active {
@@ -13285,9 +13314,7 @@ fieldset:disabled .btn {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
   background-clip: border-box;
-  border: 1px solid #e7eaed;
   border-radius: 6px;
 }
 
@@ -13325,6 +13352,7 @@ fieldset:disabled .btn {
 
 .card-title {
   margin-bottom: 0.5rem;
+    color: #ffffff;
 }
 
 .card-subtitle {
@@ -15416,6 +15444,7 @@ fieldset:disabled .btn {
   right: 0;
   left: 0;
   z-index: 1030;
+    background: #000b1a;
 }
 
 .fixed-bottom {
@@ -16090,214 +16119,263 @@ fieldset:disabled .btn {
 
 .m-0 {
   margin: 0 !important;
+    background: transparent;
 }
 
 .m-1 {
   margin: 0.25rem !important;
+    background: transparent;
 }
 
 .m-2 {
   margin: 0.5rem !important;
+    background: transparent;
 }
 
 .m-3 {
   margin: 1rem !important;
+    background: transparent;
 }
 
 .m-4 {
   margin: 1.5rem !important;
+    background: transparent;
 }
 
 .m-5 {
   margin: 3rem !important;
+    background: transparent;
 }
 
 .m-auto {
   margin: auto !important;
+    background: transparent;
 }
 
 .mx-0 {
   margin-right: 0 !important;
   margin-left: 0 !important;
+    background: transparent;
 }
 
 .mx-1 {
   margin-right: 0.25rem !important;
   margin-left: 0.25rem !important;
+    background: transparent;
 }
 
 .mx-2 {
   margin-right: 0.5rem !important;
   margin-left: 0.5rem !important;
+    background: transparent;
 }
 
 .mx-3 {
   margin-right: 1rem !important;
   margin-left: 1rem !important;
+    background: transparent;
 }
 
 .mx-4 {
   margin-right: 1.5rem !important;
   margin-left: 1.5rem !important;
+    background: transparent;
 }
 
 .mx-5 {
   margin-right: 3rem !important;
   margin-left: 3rem !important;
+    background: transparent;
 }
 
 .mx-auto {
   margin-right: auto !important;
   margin-left: auto !important;
+    background: transparent;
 }
 
 .my-0 {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
+    background: transparent;
 }
 
 .my-1 {
   margin-top: 0.25rem !important;
   margin-bottom: 0.25rem !important;
+    background: transparent;
 }
 
 .my-2 {
   margin-top: 0.5rem !important;
   margin-bottom: 0.5rem !important;
+    background: transparent;
 }
 
 .my-3 {
   margin-top: 1rem !important;
   margin-bottom: 1rem !important;
+    background: transparent;
 }
 
 .my-4 {
   margin-top: 1.5rem !important;
   margin-bottom: 1.5rem !important;
+    background: transparent;
 }
 
 .my-5 {
   margin-top: 3rem !important;
   margin-bottom: 3rem !important;
+    background: transparent;
 }
 
 .my-auto {
   margin-top: auto !important;
   margin-bottom: auto !important;
+    background: transparent;
 }
 
 .mt-0 {
   margin-top: 0 !important;
+    background: transparent;
 }
 
 .mt-1 {
   margin-top: 0.25rem !important;
+    background: transparent;
 }
 
 .mt-2, .template-demo > .btn-group,
 .template-demo > .btn-group-vertical, .template-demo .circle-progress {
   margin-top: 0.5rem !important;
+    background: transparent;
 }
 
 .mt-3, .template-demo > .btn, .template-demo > .btn-toolbar {
   margin-top: 1rem !important;
+    background: transparent;
 }
 
 .mt-4 {
   margin-top: 1.5rem !important;
+    background: transparent;
 }
 
 .mt-5 {
   margin-top: 3rem !important;
+    background: transparent;
 }
 
 .mt-auto {
   margin-top: auto !important;
+    background: transparent;
 }
 
 .me-0, .rtl .horizontal-menu .top-navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item i {
   margin-right: 0 !important;
+    background: transparent;
 }
 
 .me-1 {
   margin-right: 0.25rem !important;
+    background: transparent;
 }
 
 .me-2, .template-demo > .btn, .template-demo > .btn-group,
 .template-demo > .btn-group-vertical, .template-demo > .dropdown {
   margin-right: 0.5rem !important;
+    background: transparent;
 }
 
 .me-3, .template-demo > .btn-toolbar {
   margin-right: 1rem !important;
+    background: transparent;
 }
 
 .me-4 {
   margin-right: 1.5rem !important;
+    background: transparent;
 }
 
 .me-5 {
   margin-right: 3rem !important;
+    background: transparent;
 }
 
 .me-auto {
   margin-right: auto !important;
+    background: transparent;
 }
 
 .mb-0 {
   margin-bottom: 0 !important;
+    background: transparent;
 }
 
 .mb-1 {
   margin-bottom: 0.25rem !important;
+    background: transparent;
 }
 
 .mb-2 {
   margin-bottom: 0.5rem !important;
+    background: transparent;
 }
 
 .mb-3, .template-demo .circle-progress-block {
   margin-bottom: 1rem !important;
+    background: transparent;
 }
 
 .mb-4 {
   margin-bottom: 1.5rem !important;
+    background: transparent;
 }
 
 .mb-5 {
   margin-bottom: 3rem !important;
+    background: transparent;
 }
 
 .mb-auto {
   margin-bottom: auto !important;
+    background: transparent;
 }
 
 .ms-0, .rtl .preview-list .preview-item .preview-thumbnail .preview-icon i {
   margin-left: 0 !important;
+    background: transparent;
 }
 
 .ms-1 {
   margin-left: 0.25rem !important;
+    background: transparent;
 }
 
 .ms-2, .btn-toolbar .btn-group + .btn-group {
   margin-left: 0.5rem !important;
+    background: transparent;
 }
 
 .ms-3 {
   margin-left: 1rem !important;
+    background: transparent;
 }
 
 .ms-4 {
   margin-left: 1.5rem !important;
+    background: transparent;
 }
 
 .ms-5 {
   margin-left: 3rem !important;
+    background: transparent;
 }
 
 .ms-auto {
   margin-left: auto !important;
+    background: transparent;
 }
 
 .p-0 {
@@ -19756,6 +19834,7 @@ h3, .h3,
 h4, .h4,
 .h4 {
   font-size: 1.125rem;
+    color: #ffffff;
 }
 
 h5, .h5,
@@ -19998,10 +20077,13 @@ code {
   font-size: calc(1rem - 0.05rem);
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 400;
+    background: #000b1a;
+    color: #ffffff;
+
 }
 
 .footer .footer-wrap {
-  background: #fff;
+  background: #000b1a;
   color: color(dark);
   padding: 30px 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -21493,7 +21575,8 @@ code {
 }
 
 .card .card-title {
-  color: #001737;
+  color: #fffff;
+    background: #000b1a;
   margin-bottom: 1.5rem;
   text-transform: capitalize;
   font-size: 1.125rem;
@@ -21714,6 +21797,7 @@ code {
   margin-left: 1.75rem;
   font-size: 1rem;
   line-height: 1.5;
+    background: transparent;
 }
 
 .rtl .form-check .form-check-label {
@@ -21731,6 +21815,7 @@ code {
   cursor: pointer;
   opacity: 0;
   filter: alpha(opacity=0);
+    background: #000b1a;
 }
 
 .rtl .form-check .form-check-label input {
@@ -22044,12 +22129,15 @@ select.tt-hint {
   border: 0;
   outline: 1px solid #f1f6f8;
   color: #c9c8c8;
+    background: #000b1a;
 }
 
 select.form-control:focus, select.typeahead:focus,
 select.tt-query:focus,
 select.tt-hint:focus {
   outline: 1px solid #f1f6f8;
+    background: #000b1a;
+color: #ffff;
 }
 
 select.form-control.border-primary, select.border-primary.typeahead,
@@ -23165,7 +23253,7 @@ dl li {
 }
 
 .auth .auth-form-light {
-  background: #ffffff;
+  background: #000b1f;
 }
 
 .auth .auth-form-light select {
@@ -23218,14 +23306,17 @@ dl li {
 
 .auth .brand-logo {
   margin-bottom: 2rem;
+    background: transparent;
 }
 
 .auth .brand-logo img {
   width: 150px;
+    background: transparent;
 }
 
 .auth form .form-group {
   margin-bottom: 1.5rem;
+    background: transparent;
 }
 
 .auth form .form-group label {
@@ -23279,7 +23370,7 @@ dl li {
 }
 
 .main-panel {
-  background: #f0f3f6;
+  background: #000b1a;
   width: 100%;
   transition: width 0.25s ease, margin 0.25s ease;
   min-height: calc(100vh - 56px);
@@ -23457,7 +23548,7 @@ dl li {
 }
 
 .horizontal-menu .top-navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile .nav-profile-name {
-  color: #001737;
+  color: #FFFFFF;
   font-weight: 600;
   margin-right: .5rem;
 }
@@ -23666,7 +23757,7 @@ dl li {
 }
 
 .horizontal-menu .bottom-navbar {
-  background: #ffffff;
+  background: #000b1a;
   position: relative;
   top: 0;
   right: 0;
@@ -23684,9 +23775,6 @@ dl li {
   -moz-transition-property: position, left, right, top, z-index;
   -o-transition-property: position, left, right, top, z-index;
   transition-property: position, left, right, top, z-index;
-  box-shadow: 0 19px 34px -15px #f1f6f8;
-  -webkit-box-shadow: 0 19px 34px -15px #f1f6f8;
-  -moz-box-shadow: 0 19px 34px -15px #f1f6f8;
 }
 
 @media (max-width: 767.98px) {
@@ -24128,6 +24216,7 @@ dl li {
     top: 0;
     left: 0;
     right: 0;
+      background: #000b1a;
   }
 }
 
