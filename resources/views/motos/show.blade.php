@@ -94,7 +94,7 @@
                                                                                             Categoría: <p>{{$piece->piece}}</p>
                                                                                         </div>
                                                                                         <div class="card-footer">
-                                                                                            <a href="{{ route('products.show', encrypt($piece->id)) }}" class="">Ver Pieza</a>
+                                                                                            <a href="{{ route('products.show',  Hashids::encode($piece->id)) }}" class="">Ver Pieza</a>
                                                                                         </div>
                                                                                     </div>
                                                                                     <br>

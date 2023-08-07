@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Vinkla\Hashids\Facades\Hashids;
 
 class CategoryController extends Controller
 {
@@ -30,8 +31,9 @@ class CategoryController extends Controller
 
     public function edit($id): View
     {
+        $id = Hashids::decode($id);
         $category = Category::find($id);
-
+        $category=$category[0];
         return view('categories.edit', compact('category'));
     }
 
@@ -44,8 +46,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
+        $id = Hashids::decode($id);
         $category = Category::find($id);
-
+        $category=$category[0];
         $category->update([
             'name' => $request->name,
         ]);

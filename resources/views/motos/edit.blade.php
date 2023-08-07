@@ -17,7 +17,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="container-fluid">
-                                            <form action="{{route('motos.update', $moto->id)}}" method="POST"
+                                            <form action="{{route('motos.update', Vinkla\Hashids\Facades\Hashids::encode($moto->id))}}" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')

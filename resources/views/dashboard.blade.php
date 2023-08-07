@@ -37,7 +37,8 @@
                                                  alt="{{$moto->name}}">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{$moto->name}} {{$moto->model}}</h5>
-                                                <a href="{{ route('motos.show', $moto->id) }}" class="btn btn-primary">Ver Más</a>
+                                                <a href="{{ route('motos.show', Vinkla\Hashids\Facades\Hashids::encode($moto->id)) }}"
+                                                   class="btn btn-primary">Ver Más</a>
                                             </div>
                                         </div>
                                         <br>

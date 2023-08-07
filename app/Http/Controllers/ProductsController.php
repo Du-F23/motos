@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Vinkla\Hashids\Facades\Hashids;
 
 class ProductsController extends Controller
 {
@@ -56,7 +57,8 @@ class ProductsController extends Controller
 
     public function show($id)
     {
-        $id = decrypt($id);
+//        $id = decrypt($id);
+        $id = Hashids::decode($id);
         $products = Products::find($id);
 
         return response()->json(['data' => $products]);

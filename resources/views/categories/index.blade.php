@@ -87,7 +87,7 @@
                                                         </td>
                                                         <td>
                                                             <a type="button"
-                                                               href="{{route('categories.edit', $category->id)}}"
+                                                               href="{{route('categories.edit', Vinkla\Hashids\Facades\Hashids::encode($category->id))}}"
                                                                class="btn btn-primary btn-sm">
                                                                 <i class="mdi mdi-pencil"></i>
                                                             </a>
