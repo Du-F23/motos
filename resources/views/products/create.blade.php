@@ -49,7 +49,7 @@
                                                             <label for="moto_id" class="form-label">Moto Compatible</label>
                                                             <select class="form-select js-example-basic-multiple"
                                                                     aria-label="Seleccionar Categoria de la Moto" name="moto_id[]" multiple="multiple">
-                                                                <option selected>Seleccione una opcion</option>
+                                                                <option>Seleccione una opcion</option>
                                                                 @foreach($motos as $moto)
                                                                     <option
                                                                         value="{{$moto->id}}">{{$moto->name}} {{$moto->model}}</option>
@@ -118,6 +118,4 @@
             </div>
         </div>
     </div>
-    <link rel="stylesheet" href="../../vendors/select2/select2.min.css">
-    <link rel="stylesheet" href="../../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
 @endsection

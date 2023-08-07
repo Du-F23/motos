@@ -123,8 +123,9 @@
                                                                         image.src = reader.result;
 
                                                                         // redimensionamos la imagen
-                                                                        image.width = 250;
-                                                                        image.height = 250;
+                                                                        // image.width = 250;
+                                                                        // image.height = 250;
+                                                                        image.className = "card-img-top"
                                                                         preview.innerHTML = '';
                                                                         preview.append(image);
                                                                     };

@@ -69,9 +69,9 @@ class MotosController extends Controller
 
     public function show($id)
     {
-        $moto=Motos::with('category')->find($id);
-        $pieces=Motos::with('products')->find($id);
-        $pieces=$pieces->products;
+        $moto = Motos::with('category')->find($id);
+        $pieces = Motos::with('products')->find($id);
+        $pieces = $pieces->products;
 
         return view('motos.show', compact('moto', 'pieces'));
     }
@@ -126,13 +126,23 @@ class MotosController extends Controller
     public function showByCategory($id)
     {
         $motos = Motos::where('category_id', $id)->get();
-        return view('motos.filtered', compact('motos'));
+        if (!$motos->empty() === false) {
+            return view('motos.filtered', compact('motos'));
+        }
+//        return response()->json(['data' => $motos], 200);
+    }
+
+    public function showByCategoryJson($id)
+    {
+        $motos = Motos::where('category_id', $id)->get();
+
+        return response()->json($motos);
     }
 
     public function findPieces($id)
     {
-        $pieces=Motos::with('products')->find($id);
-        $pieces=$pieces->products;
+        $pieces = Motos::with('products')->find($id);
+        $pieces = $pieces->products;
 
         return response()->json($pieces);
     }

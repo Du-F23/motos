@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/motos/{id}', [MotosController::class, 'destroy'])->name('motos.destroy');
     Route::patch('/motos/{id}/restaurar', [MotosController::class, 'restore'])->name('motos.restore');
     Route::delete('/motos/{id}/force', [MotosController::class, 'forceDelete'])->name('motos.forceDelete');
-    Route::post('/motosByCategory/{id}', [MotosController::class, 'showByCategory'])->name('motos.motosByCategory');
+    Route::get('/motosByCategory/{id}', [MotosController::class, 'showByCategory'])->name('motos.motosByCategory');
     Route::get('/motos/{id}/pieces', [MotosController::class, 'findPieces'])->name('motos.pieces');
 });
 
@@ -64,4 +64,8 @@ Route::get('qrcode', function () {
     return $pdf->download('pdf_file.pdf');
 });
 
+
+
 require __DIR__ . '/auth.php';
+
+Route::get('/motosCategory/{id}', [MotosController::class, 'showByCategoryJson']);

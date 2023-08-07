@@ -10679,6 +10679,7 @@ progress {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   appearance: none;
+    color: #ffffff;
   border-radius: 2px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -10706,9 +10707,9 @@ progress {
 .form-control:focus, .typeahead:focus,
 .tt-query:focus,
 .tt-hint:focus {
-  color: #212529;
-  background-color: #fff;
-  border-color: #86b7fe;
+  color: #ffffff;
+    background: #000b1a;
+    border-color: #86b7fe;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
@@ -10731,7 +10732,6 @@ progress {
 .tt-hint:disabled, .form-control[readonly], .typeahead[readonly],
 .tt-query[readonly],
 .tt-hint[readonly] {
-  background-color: #e9ecef;
   opacity: 1;
 }
 
@@ -10742,7 +10742,7 @@ progress {
   margin: -0.875rem -1.375rem;
   margin-inline-end: 1.375rem;
   color: #212529;
-  background-color: #e9ecef;
+  /*background-color: #e9ecef;*/
   pointer-events: none;
   border-color: inherit;
   border-style: solid;
@@ -10794,7 +10794,7 @@ progress {
 .form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, .typeahead:hover:not(:disabled):not([readonly])::-webkit-file-upload-button,
 .tt-query:hover:not(:disabled):not([readonly])::-webkit-file-upload-button,
 .tt-hint:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
-  background-color: #dde0e3;
+  background-color: #000b1a;
 }
 
 .form-control-plaintext {
@@ -10838,6 +10838,8 @@ progress {
   padding: 0.94rem 1.94rem;
   font-size: 1.25rem;
   border-radius: 0.3rem;
+    background: #000b1a;
+    color: #fff3cd;
 }
 
 .form-control-lg::file-selector-button {

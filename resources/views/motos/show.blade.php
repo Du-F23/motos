@@ -93,6 +93,9 @@
                                                                                             <h5 class="card-title">Marca: {{$piece->marca}}</h5>
                                                                                             Categoría: <p>{{$piece->piece}}</p>
                                                                                         </div>
+                                                                                        <div class="card-footer">
+                                                                                            <a href="{{ route('products.show', encrypt($piece->id)) }}" class="">Ver Pieza</a>
+                                                                                        </div>
                                                                                     </div>
                                                                                     <br>
                                                                                     <br>

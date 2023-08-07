@@ -17,7 +17,7 @@
                                             <h4 class="text-center text-white">Motos</h4>
                                         </div>
                                         <div class="col-4">
-                                            <select class="form-control" aria-label="Default select example"
+                                            <select class="form-select" aria-label="Default select example"
                                                     id="category">
                                                 <option selected>Selecciona una categoria</option>
                                                 @foreach($categories as $category)
@@ -37,7 +37,7 @@
                                                  alt="{{$moto->name}}">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{$moto->name}} {{$moto->model}}</h5>
-                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                                <a href="{{ route('motos.show', $moto->id) }}" class="btn btn-primary">Ver Más</a>
                                             </div>
                                         </div>
                                         <br>
@@ -55,7 +55,7 @@
                         $('#category').on('change', function () {
                             $.ajax({
                                 url: "/motosByCategory/" + this.value,
-                                type: "POST",
+                                type: "get",
                                 data: {
                                     "_token": "{{ csrf_token() }}",
                                 },

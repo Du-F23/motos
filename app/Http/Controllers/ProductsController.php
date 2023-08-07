@@ -6,6 +6,7 @@ use App\Models\Motos;
 use App\Models\Products;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -55,7 +56,10 @@ class ProductsController extends Controller
 
     public function show($id)
     {
-        //
+        $id = decrypt($id);
+        $products = Products::find($id);
+
+        return response()->json(['data' => $products]);
     }
 
     public function edit($id)
