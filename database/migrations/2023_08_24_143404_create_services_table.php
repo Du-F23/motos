@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements("id");
-            $table->string("marca");
-            $table->string("piece");
-            $table->text("image");
-            $table->bigInteger('price');
-            $table->boolean('active')->default(true);
+        Schema::create('services', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('user');
+            $table->date('date_service');
+            $table->bigInteger('total')->nullable(true);
+            $table->bigInteger('costo_servicio')->nullable(true);
+            $table->foreignId('moto_id')->constrained('motos');
+            $table->foreignId('user_id')->constrained('users');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('services');
     }
 };

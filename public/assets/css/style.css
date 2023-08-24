@@ -14426,6 +14426,7 @@ fieldset:disabled .btn {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   outline: 0;
+    background-color: #000b1a;
 }
 
 .modal-backdrop {
@@ -14455,6 +14456,7 @@ fieldset:disabled .btn {
   border-bottom: 1px solid #dee2e6;
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
+    background-color: #000b1a;
 }
 
 .modal-header .btn-close {
@@ -14471,6 +14473,7 @@ fieldset:disabled .btn {
   position: relative;
   flex: 1 1 auto;
   padding: 1rem;
+    background-color: #000b1a;
 }
 
 .modal-footer {

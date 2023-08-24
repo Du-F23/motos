@@ -65,12 +65,12 @@
 
                                                         <td>
                                                             <a type="button"
-                                                               href="{{route('motos.edit', $product->id)}}"
+                                                               href="{{route('products.edit', Vinkla\Hashids\Facades\Hashids::encode($product->id))}}"
                                                                class="btn btn-primary btn-sm">
                                                                 <i class="mdi mdi-pencil"></i>
                                                             </a>
                                                             <a type="button"
-                                                               href="{{route('motos.show', $product->id)}}"
+                                                               href="{{route('products.show', Vinkla\Hashids\Facades\Hashids::encode($product->id))}}"
                                                                class="btn btn-success btn-sm text-white">
                                                                 <i class="mdi mdi-eye"></i>
                                                             </a>

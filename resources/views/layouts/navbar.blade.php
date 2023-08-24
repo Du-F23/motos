@@ -99,7 +99,7 @@
                 </li>
                 <li class="nav-item {{ Request::is('/motos') ? 'active' : ''}} {{ Request::is('/motos/*/show') ? 'active' : ''}}">
                     <a href="{{route('motos.index')}}" class="nav-link">
-                        <i class="mdi mdi-chart-areaspline menu-icon"></i>
+                        <i class="mdi mdi-motorbike menu-icon"></i>
                         <span class="menu-title">Motos</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -136,10 +136,10 @@
 {{--                        <i class="menu-arrow"></i>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
-                <li class="nav-item">
-                    <a href="pages/icons/mdi.html" class="nav-link">
-                        <i class="mdi mdi-emoticon menu-icon"></i>
-                        <span class="menu-title">Icons</span>
+                <li class="nav-item {{ Request::is('/servicios') ? 'active' : ''}}">
+                    <a href="{{ route('services.index') }}" class="nav-link">
+                        <i class="mdi mdi-notebook-outline"></i>
+                        <span class="menu-title">Servicios</span>
                         <i class="menu-arrow"></i>
                     </a>
                 </li>

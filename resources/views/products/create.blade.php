@@ -39,6 +39,14 @@
                                                             @enderror
                                                         </div>
                                                         <div class="mb-3">
+                                                            <label for="price" class="form-label">Precio</label>
+                                                            <input type="number" class="form-control" id="price"
+                                                                   placeholder="500" name="price" value="{{old('price')}}">
+                                                            @error('price')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="mb-3">
                                                             <label for="image" class="form-label">Imagen</label>
                                                             <input type="file" class="form-control" id="image" name="image" accept="image/*">
                                                             @error('image')

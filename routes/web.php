@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Motos;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
-use QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,13 +55,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/motos/{id}/force', [MotosController::class, 'forceDelete'])->name('motos.forceDelete');
     Route::get('/motosByCategory/{id}', [MotosController::class, 'showByCategory'])->name('motos.motosByCategory');
     Route::get('/motos/{id}/pieces', [MotosController::class, 'findPieces'])->name('motos.pieces');
+    Route::get('/motos/byName/', [MotosController::class, 'searchByName'])->name('motos.search');
+
+    Route::get('/servicios', [ServicesController::class, 'index'])->name('services.index');
+    Route::get('/servicios/crear', [ServicesController::class, 'create'])->name('services.create');
+    Route::post('/servicios/crear', [ServicesController::class, 'store'])->name('services.store');
+    Route::get('/servicios/{id}/show', [ServicesController::class, 'show'])->name('services.show');
+    Route::get('/services/{id}/edit', [ServicesController::class, 'edit'])->name('services.edit');
+    Route::put('/services/{id}/update', [ServicesController::class, 'update'])->name('services.update');
+    Route::delete('/services/{id}/delete', [ServicesController::class, 'destroy'])->name('services.delete');
 });
 
-Route::get('qrcode', function () {
-    $categories = Category::all();
-    $pdf = PDF::loadView('pdf_view', $categories);
-    return $pdf->download('pdf_file.pdf');
-});
+//Route::get('qrcode', function () {
+//    $categories = Category::all();
+//    $pdf = Pdf::loadView('pdf_view', $categories);
+//    return $pdf->download('document.pdf');
+//});
 
 
 

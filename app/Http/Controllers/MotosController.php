@@ -154,4 +154,17 @@ class MotosController extends Controller
 
         return response()->json($pieces);
     }
+
+    public function searchByName(Request $request){
+        $query = $request->input('query');
+
+//        $motos = Motos::where('name', $query)->orWhere('model', $query)->get();
+        $motos = Motos::where(function ($queryBuilder) use ($query) {
+            $queryBuilder->where('name', 'like', '%' . $query . '%')
+                ->orWhere('model', 'like', '%' . $query . '%');
+        })->get();
+
+//        return response()->json(['data' => $motos, 'query' => $query], 200);
+        return view('motos.byname', compact('motos'));
+    }
 }

@@ -7,7 +7,7 @@
         <div class="card-body">
             <h5 class="card-title">{{$moto->name}} {{$moto->model}}</h5>
             <p class="card-text">{{$moto->hp}}, {{$moto->color}}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="{{ route('motos.show', Vinkla\Hashids\Facades\Hashids::encode($moto->id)) }}" class="btn btn-primary">Ver Más</a>
         </div>
     </div>
     <br>

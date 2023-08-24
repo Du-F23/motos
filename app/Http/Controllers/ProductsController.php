@@ -34,6 +34,7 @@ class ProductsController extends Controller
             'marca' => ['required', 'string'],
             'piece' => ['required', 'string'],
             'image' => ['required', 'file'],
+            'price' => ['required', 'integer']
         ]);
 //        dd($request->all());
 //
@@ -48,6 +49,7 @@ class ProductsController extends Controller
             'marca' => $request->marca,
             'piece' => $request->piece,
             'image' => $image,
+            'price' => $request->price,
             'active' => 1,
         ]);
         $product->motos()->attach($request->moto_id);
@@ -66,12 +68,20 @@ class ProductsController extends Controller
 
     public function edit($id)
     {
-        //
+        $id=Hashids::decode($id);
+        $product = Products::find($id);
+        $product=$product[0];
+        $motos=Motos::all();
+        $motosSelecteds=$product->motos->pluck('id');
+
+        return view('products.edit', compact('product', 'motos', 'motosSelecteds'));
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $id=Hashids::decode($id);
+        $product=Products::find($id);
+
     }
 
     public function destroy($id)

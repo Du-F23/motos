@@ -1,8 +1,7 @@
 @extends('layouts.app')
+@section('title', 'Editar Motos')
 
-@section('title', 'Dashboard')
 @section('content')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <div class="container-scroller bg-black" id="body">
         <div class="container-fluid page-body-wrapper">
             <div class="main-panel">
@@ -17,21 +16,12 @@
                                             <h4 class="text-center text-white">Motos</h4>
                                         </div>
                                         <div class="col-4">
-                                            <select class="form-select" aria-label="Default select example"
-                                                    id="category">
-                                                <option selected>Selecciona una categoria</option>
-                                                @foreach($categories as $category)
-                                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
                                             <form enctype="multipart/form-data" method="get"
-                                                  action="{{ route('motos.search') }}" class="col-4">
+                                                  action="{{ route('motos.search') }}">
                                                 <input type="text" class="form-control" id="query"
                                                        placeholder="Italika o RT200 GP" name="query">
-                                                <button type="submit" class="btn btn-primary">Buscar
-                                                </button>
                                             </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -57,23 +47,6 @@
                         </div>
                     </div>
                 </div>
-                <script type="application/javascript">
-                    $(document).ready(function () {
-                        $('#category').on('change', function () {
-                            $.ajax({
-                                url: "/motosByCategory/" + this.value,
-                                type: "get",
-                                data: {
-                                    "_token": "{{ csrf_token() }}",
-                                },
-                                success: function (data) {
-                                    //si la respuesta del servidor es exitosa se ejecuta esta funcion y se muestra el resultado
-                                    $('#showMotosByCategory').html(data);
-                                }
-                            });
-                        });
-                    });
-                </script>
             </div>
         </div>
     </div>

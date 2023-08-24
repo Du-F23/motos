@@ -18,6 +18,7 @@ class Products extends Model
         'piece',
         'image',
         'active',
+        'price'
     ];
 
 //    public function motos(): BelongsTo
@@ -38,5 +39,10 @@ class Products extends Model
     public function parts()
     {
         return $this->hasMany(Parts::class);
+    }
+
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Services::class, 'producto_servicio', 'product_id', 'servicio_id');
     }
 }
