@@ -94,10 +94,11 @@
                                                             <select class="form-select"
                                                                     aria-label="Seleccionar Categoria de la Moto"
                                                                     name="category_id">
-                                                                <option value="{{$moto->category_id}}">Seleccione una opcion</option>
                                                                 @foreach($categories as $category)
                                                                     <option
-                                                                        value="{{$category->id}}">{{$category->name}}</option>
+                                                                        value="{{$category->id}}"
+                                                                        {{ $category->id == $moto->category_id ? 'selected' : '' }}
+                                                                    >{{$category->name}}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('category_id')

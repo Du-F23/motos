@@ -59,11 +59,11 @@ class ProductsController extends Controller
 
     public function show($id)
     {
-//        $id = decrypt($id);
         $id = Hashids::decode($id);
-        $products = Products::find($id);
+        $product = Products::with('motos')->find($id);
+        $product=$product[0];
 
-        return response()->json(['data' => $products]);
+        return view('products.show', compact('product'));
     }
 
     public function edit($id)
@@ -81,7 +81,22 @@ class ProductsController extends Controller
     {
         $id=Hashids::decode($id);
         $product=Products::find($id);
+        $product=$product[0];
+        $previousMotos = $product->motos->pluck('id')->toArray();
 
+        // Obtener los nuevos IDs de motos seleccionados desde el formulario
+        $newMotos = $request->input('moto_id', []);
+
+        $motosToRemove = array_diff($previousMotos, $newMotos);
+        $product->motos()->detach($motosToRemove);
+
+        // Agregar las nuevas motos seleccionadas
+        $motosToAdd = array_diff($newMotos, $previousMotos);
+        $product->motos()->attach($motosToAdd);
+
+        $product->update($request->all());
+
+        return redirect()->route('products.index')->with('message', 'Product updated Successfully');
     }
 
     public function destroy($id)

@@ -94,6 +94,7 @@
                                                                                                 Marca: {{$piece->marca}}</h5>
                                                                                             Categoría:
                                                                                             <p>{{$piece->piece}}</p>
+                                                                                            <h4>Precio: {{$piece->price}}</h4>
                                                                                         </div>
                                                                                         <div class="card-footer">
                                                                                             <a href="{{ route('products.show',  Hashids::encode($piece->id)) }}"

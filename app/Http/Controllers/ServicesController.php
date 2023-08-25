@@ -74,38 +74,65 @@ class ServicesController extends Controller
         return view('services.show', compact('service'));
     }
 
+    public function showJson($id){
+        $service = Services::find($id);
+
+        return response()->json($service);
+    }
+
     public function edit($id): View
     {
         $id = Hashids::decode($id);
         $service = Services::with('motos', 'users', 'products')->find($id);
         $users = User::all();
-        $products = User::all();
+        $products = Products::all();
         $motos = Motos::all();
         $service = $service[0];
+        $productsSelected = $service->products->pluck('id');
 
-        return view('services.edit', compact('service', 'products', 'motos', 'users'));
+        return view('services.edit', compact('service', 'products', 'motos', 'users', 'productsSelected'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Services $services
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Services $services)
+    public function update(Request $request, $id)
     {
-        //
+        $id=Hashids::decode($id);
+        $service=Services::find($id);
+        $service=$service[0];
+
+        $previousProducts = $service->products->pluck('id')->toArray();
+        $newProducts = $request->input('product_id', []);
+
+        $productsToRemove = array_diff($previousProducts, $newProducts);
+        $service->products()->detach($productsToRemove);
+
+        $productsToAdd = array_diff($newProducts, $previousProducts);
+        $service->products()->attach($productsToAdd);
+
+        $costoProductosToAdd = 0;
+        if (!empty($productsToAdd)) {
+            $costoProductosToAdd = Products::whereIn('id', $productsToAdd)->sum('price');
+        }
+
+        $costoProductosToRemove = Products::whereIn('id', $productsToRemove)->sum('price');
+
+        // Calcular el costo total de los productos incluyendo los previos y los nuevos
+        $totalCost = $service->products->sum('price') + $costoProductosToAdd - $costoProductosToRemove;
+
+        // Sumar el costo total de los productos al costo del servicio
+        $total = $request->costo_servicio + $totalCost;
+        $service->total = $total;
+
+        $service->update($request->all());
+
+        return redirect()->route('services.index')->with('message', 'Service update Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Services $services
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Services $services)
+    public function destroy($id)
     {
-        //
+        $service = Services::find($id);
+        $service->delete();
+
+        return redirect()->route('services.index')->with('message', 'Service deleted Successfully');
+
     }
 }

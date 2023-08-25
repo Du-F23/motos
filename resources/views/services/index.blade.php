@@ -49,7 +49,10 @@
                                                         </td>
                                                         <td>
                                                             @foreach($service->products as $piece)
-                                                                {{$piece->marca}} {{$piece->piece}},
+                                                                {{$piece->marca}} {{$piece->piece}}
+                                                                @if (!$loop->last)
+                                                                    ,
+                                                                @endif
                                                                 <br>
                                                             @endforeach
                                                         </td>
@@ -87,8 +90,54 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="exampleModal1" tabindex="-1"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Servicio Temporalmente</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-12">
+                                                    <form action="" id="deleteForm" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <p id="banner">¿Estas seguro de eliminar este registro?</p>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" type="button"
+                                                                    data-bs-dismiss="modal">Cancelar
+                                                            </button>
+                                                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script type="application/javascript">
+            // hace una peticion ajax para obtener la informacion de la moto
+            function deleteService(id) {
+                let form = document.getElementById('deleteForm')
+                form.action = '/services/' + id + '/delete'
+                $.ajax({
+                    url: '/servicios/' + id,
+                    type: 'GET',
+                    success: function (response) {
+                        console.log(response)
+                        $('#banner').html('¿Estas seguro de eliminar este registro? ' + response.date_service + ' a nombre de ' + response.user);
+                    }
+                })
+            }
+        </script>
 @endsection
