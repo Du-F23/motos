@@ -25,20 +25,65 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                            <form enctype="multipart/form-data" method="get"
-                                                  action="{{ route('motos.search') }}" class="col-4">
-                                                <input type="text" class="form-control" id="query"
-                                                       placeholder="Italika o RT200 GP" name="query">
-                                                <button type="submit" class="btn btn-primary">Buscar
-                                                </button>
-                                            </form>
+                                        <form enctype="multipart/form-data" method="get"
+                                              action="{{ route('motos.search') }}" class="col-4">
+                                            <input type="text" class="form-control" id="query"
+                                                   placeholder="Italika o RT200 GP" name="query">
+                                            <button type="submit" class="btn btn-primary">Buscar
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="row" id="showMotosByCategory">
+                                    <div class="col-sm-12 flex-column d-flex stretch-card">
+                                        <div class="row">
+                                            <div class="col-lg-3 d-flex grid-margin stretch-card">
+                                                <div class="card bg-primary">
+                                                    <div class="card-body text-white">
+                                                        <h3 class="font-weight-bold mb-3">Servicios</h3>
+                                                        <a href="{{route('services.create')}}" type="button" class="btn btn-primary text-center">
+                                                            Crear Servicio
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 d-flex grid-margin stretch-card">
+                                                <div class="card sale-diffrence-border">
+                                                    <div class="card-body">
+                                                        <h2 class="mb-2 font-weight-bold">Productos</h2>
+                                                        <small class="text-muted card-title">{{\App\Models\Products::count()}}</small>
+                                                        <br>
+                                                        <br>
+                                                        <a href="{{route('products.create')}}" class="btn btn-primary">Crear Producto</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 d-flex grid-margin stretch-card">
+                                                <div class="card sale-visit-statistics-border">
+                                                    <div class="card-body">
+                                                        <h2 class="mb-2 font-weight-medium font-bold">Motos</h2>
+                                                        <small class="text-muted card-title">{{\App\Models\Motos::count()}}</small>
+                                                        <br>
+                                                        <br>
+                                                        <a href="{{route('motos.create')}}" class="btn btn-primary">Crear Motos</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 d-flex grid-margin stretch-card">
+                                                <div class="card sale-diffrence-border">
+                                                    <div class="card-body">
+                                                        <h2 class="text-dark mb-2 font-weight-bold">$6475</h2>
+                                                        <h4 class="card-title mb-2">Sales Difference</h4>
+                                                        <small class="text-muted">APRIL 2019</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @foreach($motos as $moto)
-                                        <div class="card" style="width: 18rem;">
+                                        <div class="card" style="width: 18rem; margin: 10px;">
                                             <img src="{{asset('storage').'/'.$moto->image}}" class="card-img-top"
                                                  alt="{{$moto->name}}">
                                             <div class="card-body">
