@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Motos;
 use App\Models\Products;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +16,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Products::with('moto')->paginate(25);
+        $products = Products::with('moto', 'category')->paginate(25);
 
 //        return response()->json($products);
         return view('products.index', compact('products'));
@@ -24,17 +25,20 @@ class ProductsController extends Controller
     public function create()
     {
         $motos = Motos::all();
+        $categories = Category::where('forProduct', 1)->get();
 
-        return view('products.create', compact('motos'));
+        return view('products.create', compact('motos', 'categories'));
     }
 
     public function store(Request $request)
     {
+//        dd($request->all());
         $request->validate([
             'marca' => ['required', 'string'],
             'piece' => ['required', 'string'],
             'image' => ['required', 'file'],
-            'price' => ['required', 'integer']
+            'price' => ['required', 'integer'],
+            'category_id' => ['required', 'exists:' . Category::class . ',id']
         ]);
 //        dd($request->all());
 //
@@ -51,6 +55,7 @@ class ProductsController extends Controller
             'image' => $image,
             'price' => $request->price,
             'active' => 1,
+            'category_id' => $request->category_id,
         ]);
         $product->motos()->attach($request->moto_id);
 
@@ -60,7 +65,7 @@ class ProductsController extends Controller
     public function show($id)
     {
         $id = Hashids::decode($id);
-        $product = Products::with('motos')->find($id);
+        $product = Products::with('motos', 'category')->find($id);
         $product=$product[0];
 
         return view('products.show', compact('product'));
@@ -73,8 +78,9 @@ class ProductsController extends Controller
         $product=$product[0];
         $motos=Motos::all();
         $motosSelecteds=$product->motos->pluck('id');
+        $categories = Category::where('forProduct', 1);
 
-        return view('products.edit', compact('product', 'motos', 'motosSelecteds'));
+        return view('products.edit', compact('product', 'motos', 'motosSelecteds', 'categories'));
     }
 
     public function update(Request $request, $id)

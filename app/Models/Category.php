@@ -13,7 +13,8 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'active'
+        'active',
+        'forProduct'
     ];
 
     public function motos(): HasMany

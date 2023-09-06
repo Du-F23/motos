@@ -33,6 +33,7 @@
                                                     <th>Pieza</th>
                                                     <th>Estatus</th>
                                                     <th>Motos Compatibles</th>
+                                                    <th>Categoria</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                                 </thead>
@@ -58,11 +59,16 @@
                                                         </td>
                                                         <td>
                                                             @foreach($product->moto as $motos)
-                                                                {{$motos->name}} {{$motos->model}}, Cilindraje {{$motos->hp}} CC
+                                                                {{$motos->name}} {{$motos->model}},
+                                                                Cilindraje {{$motos->hp}} CC
                                                                 <br>
                                                             @endforeach
                                                         </td>
-
+                                                        @if($product->category != null)
+                                                            <td>{{ $product->category->name }}</td>
+                                                        @else
+                                                            <td>Ninguna</td>
+                                                        @endif
                                                         <td>
                                                             <a type="button"
                                                                href="{{route('products.edit', Vinkla\Hashids\Facades\Hashids::encode($product->id))}}"
@@ -95,82 +101,82 @@
                             </div>
                         </div>
                         {{--Motos borradas--}}
-{{--                        @if($motosDeleted->count() !== 0)--}}
-{{--                            <div class="col-lg-12 grid-margin stretch-card">--}}
-{{--                                <div class="card">--}}
-{{--                                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">--}}
-{{--                                        <div class="bg-gradient-primary shadow-primary rounded pt-4 pb-3">--}}
-{{--                                            <h6 class="text-white text-capitalize ps-3">Lista De Motos Eliminadas</h6>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="card-body">--}}
-{{--                                        <div class="row">--}}
-{{--                                            <div class="table-responsive">--}}
-{{--                                                <table class="table" id="table">--}}
-{{--                                                    <thead>--}}
-{{--                                                    <tr>--}}
-{{--                                                        <th>#</th>--}}
-{{--                                                        <th>Nombre</th>--}}
-{{--                                                        <th>Año</th>--}}
-{{--                                                        <th>Cilindraje</th>--}}
-{{--                                                        <th>Color</th>--}}
-{{--                                                        <th>Categoria</th>--}}
-{{--                                                        <th>Acciones</th>--}}
-{{--                                                    </tr>--}}
-{{--                                                    </thead>--}}
-{{--                                                    <tbody>--}}
-{{--                                                    @foreach($motosDeleted as $moto)--}}
-{{--                                                        <tr>--}}
-{{--                                                            <td>{{$loop->index + 1}}</td>--}}
-{{--                                                            <td>--}}
-{{--                                                                <div class="col-auto">--}}
-{{--                                                                    <img src="{{asset('storage/'.$moto->image)}}"--}}
-{{--                                                                         alt="{{$moto->name}}&nbsp;{{$moto->model}}">--}}
-{{--                                                                    &nbsp;&nbsp;{{$moto->name}}&nbsp;{{$moto->model}}--}}
-{{--                                                                </div>--}}
-{{--                                                            </td>--}}
-{{--                                                            <td>{{$moto->year}}</td>--}}
-{{--                                                            <td>{{$moto->hp}}</td>--}}
-{{--                                                            <td>{{$moto->color}}</td>--}}
-{{--                                                            <td>{{$moto->category->name}}</td>--}}
-{{--                                                            <td>--}}
-{{--                                                                <button--}}
-{{--                                                                    class="btn btn-rounded-success btn-sm align-content-md-center align-items-center align-self-center"--}}
-{{--                                                                    title="Restore"--}}
-{{--                                                                    data-bs-toggle="modal"--}}
-{{--                                                                    data-bs-target="#exampleModal3"--}}
-{{--                                                                    data-bs-placement="top"--}}
-{{--                                                                    onclick="restoreRegistro({{$moto->id}})"--}}
-{{--                                                                >--}}
-{{--                                                                    Reactivar--}}
-{{--                                                                    &nbsp;&nbsp;--}}
-{{--                                                                    <i class="mdi mdi-backup-restore"></i>--}}
-{{--                                                                </button>--}}
+                        {{--                        @if($motosDeleted->count() !== 0)--}}
+                        {{--                            <div class="col-lg-12 grid-margin stretch-card">--}}
+                        {{--                                <div class="card">--}}
+                        {{--                                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">--}}
+                        {{--                                        <div class="bg-gradient-primary shadow-primary rounded pt-4 pb-3">--}}
+                        {{--                                            <h6 class="text-white text-capitalize ps-3">Lista De Motos Eliminadas</h6>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <div class="card-body">--}}
+                        {{--                                        <div class="row">--}}
+                        {{--                                            <div class="table-responsive">--}}
+                        {{--                                                <table class="table" id="table">--}}
+                        {{--                                                    <thead>--}}
+                        {{--                                                    <tr>--}}
+                        {{--                                                        <th>#</th>--}}
+                        {{--                                                        <th>Nombre</th>--}}
+                        {{--                                                        <th>Año</th>--}}
+                        {{--                                                        <th>Cilindraje</th>--}}
+                        {{--                                                        <th>Color</th>--}}
+                        {{--                                                        <th>Categoria</th>--}}
+                        {{--                                                        <th>Acciones</th>--}}
+                        {{--                                                    </tr>--}}
+                        {{--                                                    </thead>--}}
+                        {{--                                                    <tbody>--}}
+                        {{--                                                    @foreach($motosDeleted as $moto)--}}
+                        {{--                                                        <tr>--}}
+                        {{--                                                            <td>{{$loop->index + 1}}</td>--}}
+                        {{--                                                            <td>--}}
+                        {{--                                                                <div class="col-auto">--}}
+                        {{--                                                                    <img src="{{asset('storage/'.$moto->image)}}"--}}
+                        {{--                                                                         alt="{{$moto->name}}&nbsp;{{$moto->model}}">--}}
+                        {{--                                                                    &nbsp;&nbsp;{{$moto->name}}&nbsp;{{$moto->model}}--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                            </td>--}}
+                        {{--                                                            <td>{{$moto->year}}</td>--}}
+                        {{--                                                            <td>{{$moto->hp}}</td>--}}
+                        {{--                                                            <td>{{$moto->color}}</td>--}}
+                        {{--                                                            <td>{{$moto->category->name}}</td>--}}
+                        {{--                                                            <td>--}}
+                        {{--                                                                <button--}}
+                        {{--                                                                    class="btn btn-rounded-success btn-sm align-content-md-center align-items-center align-self-center"--}}
+                        {{--                                                                    title="Restore"--}}
+                        {{--                                                                    data-bs-toggle="modal"--}}
+                        {{--                                                                    data-bs-target="#exampleModal3"--}}
+                        {{--                                                                    data-bs-placement="top"--}}
+                        {{--                                                                    onclick="restoreRegistro({{$moto->id}})"--}}
+                        {{--                                                                >--}}
+                        {{--                                                                    Reactivar--}}
+                        {{--                                                                    &nbsp;&nbsp;--}}
+                        {{--                                                                    <i class="mdi mdi-backup-restore"></i>--}}
+                        {{--                                                                </button>--}}
 
-{{--                                                                <button--}}
-{{--                                                                    class="btn btn-danger btn-sm align-content-md-center align-items-center align-self-center"--}}
-{{--                                                                    data-bs-toggle="modal"--}}
-{{--                                                                    data-bs-target="#exampleModal2"--}}
-{{--                                                                    data-bs-placement="top"--}}
-{{--                                                                    title="Eliminar Permanentemente"--}}
-{{--                                                                    type="button"--}}
-{{--                                                                    onclick="deleteMoto({{$moto->id}})"--}}
-{{--                                                                >--}}
-{{--                                                                    Eliminar--}}
-{{--                                                                    &nbsp;&nbsp;--}}
-{{--                                                                    <i class="mdi mdi-delete"></i>--}}
-{{--                                                                </button>--}}
-{{--                                                            </td>--}}
-{{--                                                        </tr>--}}
-{{--                                                    @endforeach--}}
-{{--                                                    </tbody>--}}
-{{--                                                </table>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
+                        {{--                                                                <button--}}
+                        {{--                                                                    class="btn btn-danger btn-sm align-content-md-center align-items-center align-self-center"--}}
+                        {{--                                                                    data-bs-toggle="modal"--}}
+                        {{--                                                                    data-bs-target="#exampleModal2"--}}
+                        {{--                                                                    data-bs-placement="top"--}}
+                        {{--                                                                    title="Eliminar Permanentemente"--}}
+                        {{--                                                                    type="button"--}}
+                        {{--                                                                    onclick="deleteMoto({{$moto->id}})"--}}
+                        {{--                                                                >--}}
+                        {{--                                                                    Eliminar--}}
+                        {{--                                                                    &nbsp;&nbsp;--}}
+                        {{--                                                                    <i class="mdi mdi-delete"></i>--}}
+                        {{--                                                                </button>--}}
+                        {{--                                                            </td>--}}
+                        {{--                                                        </tr>--}}
+                        {{--                                                    @endforeach--}}
+                        {{--                                                    </tbody>--}}
+                        {{--                                                </table>--}}
+                        {{--                                            </div>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        @endif--}}
                     </div>
 
                     {{--                    modal para eliminar--}}
@@ -210,7 +216,8 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Producto Permanentemente</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Producto
+                                        Permanentemente</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>

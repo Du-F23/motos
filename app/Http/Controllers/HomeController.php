@@ -21,7 +21,7 @@ class HomeController extends Controller
 
     public function dashboard(): View
     {
-        $categories = Category::all();
+        $categories = Category::where('forProduct', 0)->get();
         $motos = Motos::all();
 
         return view('dashboard', compact('motos', 'categories'));

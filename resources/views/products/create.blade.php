@@ -17,7 +17,8 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="container-fluid">
-                                            <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{route('products.store')}}" method="POST"
+                                                  enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-8">
@@ -33,7 +34,8 @@
                                                         <div class="mb-3">
                                                             <label for="piece" class="form-label">Piece</label>
                                                             <input type="text" class="form-control" id="piece"
-                                                                   placeholder="Pieza" name="piece" value="{{old('piece')}}">
+                                                                   placeholder="Pieza" name="piece"
+                                                                   value="{{old('piece')}}">
                                                             @error('piece')
                                                             <div class="text-danger">{{ $message }}</div>
                                                             @enderror
@@ -41,22 +43,26 @@
                                                         <div class="mb-3">
                                                             <label for="price" class="form-label">Precio</label>
                                                             <input type="number" class="form-control" id="price"
-                                                                   placeholder="500" name="price" value="{{old('price')}}">
+                                                                   placeholder="500" name="price"
+                                                                   value="{{old('price')}}">
                                                             @error('price')
                                                             <div class="text-danger">{{ $message }}</div>
                                                             @enderror
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="image" class="form-label">Imagen</label>
-                                                            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                                            <input type="file" class="form-control" id="image"
+                                                                   name="image" accept="image/*">
                                                             @error('image')
                                                             <div class="text-danger">{{ $message }}</div>
                                                             @enderror
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="moto_id" class="form-label">Moto Compatible</label>
+                                                            <label for="moto_id" class="form-label">Moto
+                                                                Compatible</label>
                                                             <select class="form-select js-example-basic-multiple"
-                                                                    aria-label="Seleccionar Categoria de la Moto" name="moto_id[]" multiple="multiple">
+                                                                    aria-label="Seleccionar Categoria de la Moto"
+                                                                    name="moto_id[]" multiple="multiple">
                                                                 <option>Seleccione una opcion</option>
                                                                 @foreach($motos as $moto)
                                                                     <option
@@ -68,8 +74,26 @@
                                                             @enderror
                                                         </div>
                                                         <div class="mb-3">
-                                                            <button type="submit" class="btn btn-primary">Guardar</button>
-                                                            <a href="{{route('products.index')}}" class="btn btn-danger text-white">Cancelar</a>
+                                                            <label for="category_id"
+                                                                   class="form-label">Categoria</label>
+                                                            <select class="form-select"
+                                                                    aria-label="Seleccionar Categoria de la Moto"
+                                                                    name="category_id">
+                                                                <option selected>Seleccione una opcion</option>
+                                                                @foreach($categories as $category)
+                                                                    <option
+                                                                        value="{{$category->id}}">{{$category->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('category_id')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <button type="submit" class="btn btn-primary">Guardar
+                                                            </button>
+                                                            <a href="{{route('products.index')}}"
+                                                               class="btn btn-danger text-white">Cancelar</a>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
@@ -90,12 +114,12 @@
                                                             </div>
 
                                                             <script type="text/javascript">
-                                                                document.getElementById("image").onchange = function(e) {
+                                                                document.getElementById("image").onchange = function (e) {
                                                                     let reader = new FileReader();
 
                                                                     reader.readAsDataURL(e.target.files[0]);
 
-                                                                    reader.onload = function(){
+                                                                    reader.onload = function () {
                                                                         let preview = document.getElementById('preview'),
                                                                             image = document.createElement('img');
 
@@ -108,7 +132,7 @@
                                                                         preview.append(image);
                                                                     };
                                                                 }
-                                                                $(document).ready(function() {
+                                                                $(document).ready(function () {
                                                                     $('.js-example-basic-multiple').select2();
                                                                 });
                                                             </script>

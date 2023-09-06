@@ -12,18 +12,21 @@ class CategoryController extends Controller
 {
     public function index(): View
     {
-        $categories = Category::all();
+        $categories = Category::where('forProduct', 0)->get();
+        $categoriesForProducts = Category::where('forProduct', 1)->get();
 
         $categoriesDeleted = Category::onlyTrashed()->get();
 
-        return view('categories.index', compact('categories', 'categoriesDeleted'));
+        return view('categories.index', compact('categories', 'categoriesForProducts','categoriesDeleted'));
     }
 
     public function store(Request $request): RedirectResponse
     {
+//        dd($request->all());
         $category = Category::create([
             'name' => $request->name,
             'active' => true,
+            'forProduct' => $request->forProduct
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');

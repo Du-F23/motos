@@ -77,6 +77,19 @@
                                                             @enderror
                                                         </div>
                                                         <div class="mb-3">
+                                                        <label for="category_id" class="form-label">Categoria</label>
+                                                        <select class="form-select"
+                                                                aria-label="Seleccionar Categoria de la Moto" name="category_id">
+                                                            @foreach($categories as $category)
+                                                                <option
+                                                                    value="{{$category->id}}" {{ $product->category->id == $service->$category_id ? 'selected' : '' }}>{{$category->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('category_id')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                        <div class="mb-3">
                                                             <button type="submit" class="btn btn-primary">Guardar
                                                             </button>
                                                             <a href="{{route('products.index')}}"

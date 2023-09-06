@@ -74,9 +74,11 @@
                                             <div class="col-lg-3 d-flex grid-margin stretch-card">
                                                 <div class="card sale-diffrence-border">
                                                     <div class="card-body">
-                                                        <h2 class="text-dark mb-2 font-weight-bold">$6475</h2>
-                                                        <h4 class="card-title mb-2">Sales Difference</h4>
-                                                        <small class="text-muted">APRIL 2019</small>
+                                                        <h2 class="mb-2 font-weight-bold">Categorias</h2>
+                                                        <small class="text-muted card-title">{{\App\Models\Category::count()}}</small>
+                                                        <br>
+                                                        <br>
+                                                        <a href="{{route('categories.index')}}" class="btn btn-primary">Crear Categorias</a>
                                                     </div>
                                                 </div>
                                             </div>
