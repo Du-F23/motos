@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/motos/{id}', [MotosController::class, 'destroy'])->name('motos.destroy');
     Route::patch('/motos/{id}/restaurar', [MotosController::class, 'restore'])->name('motos.restore');
     Route::delete('/motos/{id}/force', [MotosController::class, 'forceDelete'])->name('motos.forceDelete');
-    Route::get('/motosByCategory/{id}', [MotosController::class, 'showByCategory'])->name('motos.motosByCategory');
+    Route::get('/motosByCategory/{id}/{year?}/{hps?}', [MotosController::class, 'showByCategory'])->name('motos.motosByCategory');
     Route::get('/motos/{id}/pieces', [MotosController::class, 'findPieces'])->name('motos.pieces');
     Route::get('/motos/byName/', [MotosController::class, 'searchByName'])->name('motos.search');
 

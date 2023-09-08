@@ -23,7 +23,7 @@ class MotosController extends Controller
 
     public function create(): View
     {
-        $categories = Category::all();
+        $categories = Category::where('forProduct', 0)->get();
 
         return view('motos.create', compact('categories'));
     }
@@ -85,16 +85,16 @@ class MotosController extends Controller
         $id = Hashids::decode($id);
         $moto = Motos::with('category')->find($id);
         $categories = Category::all();
-        $moto=$moto[0];
+        $moto = $moto[0];
 
         return view('motos.edit', compact('moto', 'categories'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $id=Hashids::decode($id);
+        $id = Hashids::decode($id);
         $moto = Motos::find($id);
-        $moto=$moto[0];
+        $moto = $moto[0];
         if ($request->file('image')) {
             $image = $request->file('image')->storeAs('public/motos', time() . '_' . $request->name . '_' . $request->file('image')->getClientOriginalName());
             $image = str_replace('public/', '', $image);
@@ -131,13 +131,25 @@ class MotosController extends Controller
         return redirect()->route('motos.index')->with('success', 'Moto deleted successfully.');
     }
 
-    public function showByCategory($id)
+    public function showByCategory($id, $year = null, $hps = null)
     {
         $motos = Motos::where('category_id', $id)->get();
-        if (!$motos->empty() === false) {
-            return view('motos.filtered', compact('motos'));
+
+        if ($hps != null) {
+            $motos = Motos::where('category_id', $id)->where('year', $year)->where('hp', $hps)->get();
+//            return response()->json(['data' => $motos], 200);
+        } elseif ($year != null){
+            $motos = Motos::where('category_id', $id)->where('year', $year)->orWhere('hp', $year)->get();
         }
-//        return response()->json(['data' => $motos], 200);
+        $years = Motos::all(['year']);
+        $hp = Motos::all(['hp']);
+        if (!$motos->empty() === false) {
+            return view('motos.filtered', compact('motos', 'hp', 'years', 'id'));
+        }
+
+        $years = Motos::all(['year']);
+        $hp = Motos::all(['hp']);
+        return view('motos.filtered', compact('motos', 'hp', 'years'));
     }
 
     public function showByCategoryJson($id)
@@ -155,7 +167,8 @@ class MotosController extends Controller
         return response()->json($pieces);
     }
 
-    public function searchByName(Request $request){
+    public function searchByName(Request $request)
+    {
         $query = $request->input('query');
 
 //        $motos = Motos::where('name', $query)->orWhere('model', $query)->get();

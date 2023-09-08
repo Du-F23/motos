@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text("image");
             $table->bigInteger('price');
             $table->boolean('active')->default(true);
+            $table->foreignId('category_id')->constrained('categories');
             $table->softDeletes();
             $table->timestamps();
         });
