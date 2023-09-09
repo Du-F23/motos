@@ -23,79 +23,58 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="table-responsive">
-                                            <table class="table" id="table">
-                                                <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Imagen</th>
-                                                    <th>Marca</th>
-                                                    <th>Pieza</th>
-                                                    <th>Estatus</th>
-                                                    <th>Motos Compatibles</th>
-                                                    <th>Categoria</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($products as $product)
-                                                    <tr>
-                                                        <td>{{$loop->index + 1}}</td>
-                                                        <td>
-                                                            <div class="col-auto">
-                                                                <img src="{{asset('storage/'.$product->image)}}"
-                                                                     alt="{{$product->marca}} {{$product->piece}}">
-                                                                &nbsp;&nbsp;{{$product->name}}&nbsp;{{$product->model}}
-                                                            </div>
-                                                        </td>
-                                                        <td>{{$product->marca}}</td>
-                                                        <td>{{$product->piece}}</td>
-                                                        <td>
-                                                            @if($product->active)
-                                                                <label class="badge badge-success">Activo</label>
-                                                            @else
-                                                                <label class="badge badge-danger">Inactivo</label>
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @foreach($product->moto as $motos)
-                                                                {{$motos->name}} {{$motos->model}},
-                                                                Cilindraje {{$motos->hp}} CC
-                                                                <br>
-                                                            @endforeach
-                                                        </td>
+                                        @foreach($products as $product)
+                                            <div class="card" style="width: 18rem; margin: 10px" >
+                                                <img src="{{asset('storage/'.$product->image)}}"
+                                                     alt="{{$product->marca}} {{$product->piece}}">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{$product->marca}} {{$product->piece}}</h5>
+                                                    <p class="card-text">
+                                                        Categoria:
                                                         @if($product->category != null)
-                                                            <td>{{ $product->category->name }}</td>
+                                                            {{ $product->category->name }}
                                                         @else
-                                                            <td>Ninguna</td>
+                                                            Ninguna
                                                         @endif
-                                                        <td>
-                                                            <a type="button"
-                                                               href="{{route('products.edit', Vinkla\Hashids\Facades\Hashids::encode($product->id))}}"
-                                                               class="btn btn-primary btn-sm">
-                                                                <i class="mdi mdi-pencil"></i>
-                                                            </a>
-                                                            <a type="button"
-                                                               href="{{route('products.show', Vinkla\Hashids\Facades\Hashids::encode($product->id))}}"
-                                                               class="btn btn-success btn-sm text-white">
-                                                                <i class="mdi mdi-eye"></i>
-                                                            </a>
-                                                            <button class="btn btn-danger btn-sm"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal1"
-                                                                    data-bs-placement="top"
-                                                                    title="Eliminar"
-                                                                    type="button"
-                                                                    onclick="deleteCategory({{$product->id}})"
-                                                            >
-                                                                <i class="mdi mdi-delete"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                    </p>
+                                                    <p class="card-text">
+                                                        Motos:
+                                                        @foreach($product->moto as $motos)
+                                                            {{$motos->name}} {{$motos->model}},
+                                                            Cilindraje {{$motos->hp}} C.C.
+                                                            <br>
+                                                        @endforeach
+                                                    </p>
+                                                    @if($product->active)
+                                                        <label class="badge badge-success">Activo</label>
+                                                    @else
+                                                        <label class="badge badge-danger">Inactivo</label>
+                                                    @endif
+                                                </div>
+                                                <div class="card-footer">
+                                                    <a type="button"
+                                                       href="{{route('products.edit', Vinkla\Hashids\Facades\Hashids::encode($product->id))}}"
+                                                       class="btn btn-primary btn-sm">
+                                                        <i class="mdi mdi-pencil"></i>
+                                                    </a>
+                                                    <a type="button"
+                                                       href="{{route('products.show', Vinkla\Hashids\Facades\Hashids::encode($product->id))}}"
+                                                       class="btn btn-success btn-sm text-white">
+                                                        <i class="mdi mdi-eye"></i>
+                                                    </a>
+                                                    <button class="btn btn-danger btn-sm"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal1"
+                                                            data-bs-placement="top"
+                                                            title="Eliminar"
+                                                            type="button"
+                                                            onclick="deleteCategory({{$product->id}})"
+                                                    >
+                                                        <i class="mdi mdi-delete"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

@@ -11,7 +11,8 @@
                             <div class="card">
                                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                     <div class="bg-gradient-primary shadow-primary rounded pt-4 pb-3">
-                                        <h6 class="text-white text-capitalize ps-3">Mostrar Moto {{ $moto->name }} {{$moto->model}}</h6>
+                                        <h6 class="text-white text-capitalize ps-3">Mostrar
+                                            Moto {{ $moto->name }} {{$moto->model}}</h6>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -75,34 +76,80 @@
                                                                                          alt="{{ $moto->name }}"/>
                                                                                 </div>
                                                                                 <div class="col-md-5">
-                                                                                    Nombre: <p>{{$moto->name}} {{$moto->model}}</p>
+                                                                                    Nombre:
+                                                                                    <p>{{$moto->name}} {{$moto->model}}</p>
                                                                                     Año: <p>{{$moto->year}}</p>
                                                                                     Cilindraje: <p>{{$moto->hp}} CC</p>
                                                                                     Color: <p>{{$moto->color}}</p>
                                                                                 </div>
-
-                                                                                <h3>Piezas Compatibles</h3>
+                                                                                <div class="col-md-2"></div>
+                                                                                <br>
+                                                                                <div class="col-md-12">
+                                                                                    <h3>Piezas Compatibles</h3>
+                                                                                </div>
                                                                                 <br>
                                                                                 <br>
-                                                                                @foreach($pieces  as $piece)
-                                                                                    <div class="card" style="width: 18rem;">
-                                                                                        <img class="card-img w-50 img-fluid align-items-center align-content-center justify-content-center"
-                                                                                             src="{{ asset('storage/'.$piece->image) }}"
-                                                                                             alt="{{ $piece->marca }} {{$piece->piece}}" width="20px"/>
-                                                                                        <div class="card-body">
-                                                                                            <h5 class="card-title">Marca: {{$piece->marca}}</h5>
-                                                                                            Categoría: <p>{{$piece->piece}}</p>
-                                                                                        </div>
-                                                                                        <div class="card-footer">
-                                                                                            <a href="{{ route('products.show',  Hashids::encode($piece->id)) }}" class="">Ver Pieza</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <br>
-                                                                                    <br>
-                                                                                @endforeach
+                                                                                <div class="accordion"
+                                                                                     id="accordionExample">
+                                                                                    @php $previousCategory = null @endphp
+                                                                                    @php $productCount = 0 @endphp
+                                                                                    @foreach($pieces as $index => $piece)
+                                                                                        @if ($piece->category_id !== $previousCategory)
+                                                                                            @if ($previousCategory !== null)
+                                                                                </div>
                                                                             </div>
                                                                         </div>
+                                                                        @endif
+                                                                        <div class="accordion-item">
+                                                                            <h2 class="accordion-header"
+                                                                                id="heading{{ $index }}">
+                                                                                <button class="accordion-button"
+                                                                                        type="button"
+                                                                                        data-bs-toggle="collapse"
+                                                                                        data-bs-target="#collapse{{ $index }}"
+                                                                                        aria-expanded="true"
+                                                                                        aria-controls="collapse{{ $index }}">
+                                                                                    {{ $piece->category->name }}
+                                                                                </button>
+                                                                            </h2>
+                                                                            <div id="collapse{{ $index }}"
+                                                                                 class="accordion-collapse collapse show"
+                                                                                 aria-labelledby="heading{{ $index }}"
+                                                                                 data-bs-parent="#accordionExample">
+                                                                                <div class="accordion-body">
+                                                                                    <div class="row">
+                                                                                        @endif
+                                                                                        <div class="col-md-4">
+                                                                                            <!-- Contenido de cada producto -->
+                                                                                            <img
+                                                                                                class="card-img w-50 img-fluid align-items-center align-content-center justify-content-center"
+                                                                                                src="{{ asset('storage/'.$piece->image) }}"
+                                                                                                alt="{{ $piece->marca }} {{$piece->piece}}"
+                                                                                                width="20px"/>
+                                                                                            <br>
+                                                                                            <strong>Marca: {{ $piece->marca }}</strong>
+                                                                                            <br>
+                                                                                            <p>
+                                                                                                Pieza: {{ $piece->piece }}</p>
+                                                                                            <br>
+                                                                                            <a href="{{ route('products.show',  Hashids::encode($piece->id)) }}">Ver
+                                                                                                Pieza</a>
+                                                                                        </div>
+                                                                                        <!-- Cerrar el acordeón después de mostrar 3 productos -->
+                                                                                        @if ($productCount === 2 || $loop->last)
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- Cerrar la fila actual de productos -->
+                                                                        @php $productCount = 0 @endphp
                                                                     </div>
+                                                                    <!-- Cerrar el acordeón actual -->
+                                                                    @else
+                                                                        @php $productCount++ @endphp
+                                                                    @endif
+                                                                    @php $previousCategory = $piece->category_id @endphp
+                                                                    @endforeach
                                                                 </div>
                                                             </div>
                                                         </div>

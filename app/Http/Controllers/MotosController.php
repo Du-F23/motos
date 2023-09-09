@@ -72,10 +72,18 @@ class MotosController extends Controller
     public function show($id)
     {
         $id = Hashids::decode($id);
+//        $moto = Motos::with('category')->find($id);
+//        $pieces = Motos::with('products')->find($id);
+//        $pieces = $pieces[0]->products;
+//        $moto = $moto[0];
         $moto = Motos::with('category')->find($id);
-        $pieces = Motos::with('products')->find($id);
-        $pieces = $pieces[0]->products;
+        $pieces = Motos::with(['products' => function ($query) {
+            $query->with('category')->orderBy('category_id', 'asc');
+        }])->find($id);
         $moto = $moto[0];
+        $pieces = $pieces[0]->products;
+
+//        return response()->json($pieces);
 
         return view('motos.show', compact('moto', 'pieces'));
     }

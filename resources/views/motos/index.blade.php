@@ -23,61 +23,40 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="table-responsive">
-                                            <table class="table" id="table">
-                                                <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Nombre</th>
-                                                    <th>Año</th>
-                                                    <th>Cilindraje</th>
-                                                    <th>Color</th>
-                                                    <th>Categoria</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($motos as $moto)
-                                                    <tr>
-                                                        <td>{{$loop->index + 1}}</td>
-                                                        <td>
-                                                            <div class="col-auto">
-                                                                <img src="{{asset('storage/'.$moto->image)}}"
-                                                                     alt="{{$moto->name}}&nbsp;{{$moto->model}}">
-                                                                &nbsp;&nbsp;{{$moto->name}}&nbsp;{{$moto->model}}
-                                                            </div>
-                                                        </td>
-                                                        <td>{{$moto->year}}</td>
-                                                        <td>{{$moto->hp}}</td>
-                                                        <td>{{$moto->color}}</td>
-                                                        <td>{{$moto->category->name}}</td>
-                                                        <td>
-                                                            <a type="button"
-                                                               href="{{route('motos.edit', Vinkla\Hashids\Facades\Hashids::encode($moto->id))}}"
-                                                               class="btn btn-primary btn-sm">
-                                                                <i class="mdi mdi-pencil"></i>
-                                                            </a>
-                                                            <a type="button"
-                                                               href="{{route('motos.show', Vinkla\Hashids\Facades\Hashids::encode($moto->id))}}"
-                                                               class="btn btn-success btn-sm text-white">
-                                                                <i class="mdi mdi-eye"></i>
-                                                            </a>
-                                                            <button class="btn btn-danger btn-sm"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal1"
-                                                                    data-bs-placement="top"
-                                                                    title="Eliminar"
-                                                                    type="button"
-                                                                    onclick="deleteCategory({{$moto->id}})"
-                                                            >
-                                                                <i class="mdi mdi-delete"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                        @foreach($motos as $moto)
+                                            <div class="card" style="width: 18rem; margin: 10px">
+                                                <img src="{{asset('storage').'/'.$moto->image}}" class="card-img-top"
+                                                     alt="{{$moto->name}}">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{$moto->name}} {{$moto->model}}</h5>
+                                                    <p class="card-text">C.C. {{$moto->hp}},
+                                                    <p class="card-text">Colores: {{$moto->color}}</p>
+                                                    <p class="card-text">Año {{$moto->year}}</p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <a type="button"
+                                                       href="{{route('motos.edit', Vinkla\Hashids\Facades\Hashids::encode($moto->id))}}"
+                                                       class="btn btn-primary btn-sm">
+                                                        <i class="mdi mdi-pencil"></i>
+                                                    </a>
+                                                    <a type="button"
+                                                       href="{{route('motos.show', Vinkla\Hashids\Facades\Hashids::encode($moto->id))}}"
+                                                       class="btn btn-success btn-sm text-white">
+                                                        <i class="mdi mdi-eye"></i>
+                                                    </a>
+                                                    <button class="btn btn-danger btn-sm"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal1"
+                                                            data-bs-placement="top"
+                                                            title="Eliminar"
+                                                            type="button"
+                                                            onclick="deleteCategory({{$moto->id}})"
+                                                    >
+                                                        <i class="mdi mdi-delete"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
