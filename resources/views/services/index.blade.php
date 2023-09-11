@@ -19,6 +19,13 @@
                                                 <i class="mdi mdi-plus-circle-outline"></i>
                                             </a>
                                         </div>
+                                        <div class="float-start" style="width: 1000px">
+                                            <form method="get"
+                                                  action="{{ route('services.search') }}" class="col-4">
+                                                <input type="text" class="form-control" id="query"
+                                                       placeholder="Nombre del Cliente" name="query">
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -31,6 +38,7 @@
                                                     <th>Fecha de Servicio</th>
                                                     <th>Moto</th>
                                                     <th>Piezas Cambiadas</th>
+                                                    <th>En Garantia</th>
                                                     <th>Dueño</th>
                                                     <th>Costos de Servicio</th>
                                                     <th>Gastos Totales</th>
@@ -56,6 +64,13 @@
                                                                 <br>
                                                             @endforeach
                                                         </td>
+                                                        <td>
+                                                            @if(\Carbon\Carbon::parse($service->date_service)->diffInDays(\Carbon\Carbon::now()) <= 15)
+                                                                <label class="badge badge-success">En Garantia</label>
+                                                            @else
+                                                                <label class="badge badge-danger">Fuera de Garantia</label>
+                                                            @endif
+                                                        </td>
                                                         <td>{{$service->user}}</td>
                                                         <td>$ {{$service->costo_servicio}}</td>
                                                         <td>$ {{$service->total}}</td>
@@ -63,7 +78,7 @@
                                                             <a type="button"
                                                                href="{{route('services.edit', Vinkla\Hashids\Facades\Hashids::encode($service->id))}}"
                                                                class="btn btn-primary btn-sm">
-                                                                <i class="mdi mdi-pencil" z></i>
+                                                                <i class="mdi mdi-pencil"></i>
                                                             </a>
                                                             <a type="button"
                                                                href="{{route('services.show', Vinkla\Hashids\Facades\Hashids::encode($service->id))}}"

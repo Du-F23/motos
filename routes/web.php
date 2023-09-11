@@ -60,11 +60,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/servicios', [ServicesController::class, 'index'])->name('services.index');
     Route::get('/servicios/crear', [ServicesController::class, 'create'])->name('services.create');
     Route::post('/servicios/crear', [ServicesController::class, 'store'])->name('services.store');
-    Route::get('/servicios/{id}', [ServicesController::class, 'showJson'])->name('services.showJson');
+    Route::get('/servicios/{id}/json', [ServicesController::class, 'showJson'])->name('services.showJson');
     Route::get('/servicios/{id}/show', [ServicesController::class, 'show'])->name('services.show');
     Route::get('/services/{id}/edit', [ServicesController::class, 'edit'])->name('services.edit');
     Route::put('/services/{id}/update', [ServicesController::class, 'update'])->name('services.update');
     Route::delete('/services/{id}/delete', [ServicesController::class, 'destroy'])->name('services.delete');
+    Route::get('/servicios/user/', [ServicesController::class, 'search'])->name('services.search');
 });
 
 //Route::get('qrcode', function () {

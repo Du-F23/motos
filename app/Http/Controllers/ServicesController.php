@@ -7,6 +7,7 @@ use App\Models\Products;
 use App\Models\Services;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,15 +31,8 @@ class ServicesController extends Controller
         return view('services.create', compact('motos', 'products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request): RedirectResponse
     {
-
         $request->validate([
             'user' => ['required', 'string'],
             'costo_servicio' => ['required', 'integer'],
@@ -64,7 +58,7 @@ class ServicesController extends Controller
         return redirect()->route('services.index')->with('success', 'Service created successfully');
     }
 
-    public function show($id)
+    public function show($id): View
     {
         $id = Hashids::decode($id);
         $service = Services::with('motos', 'products', 'users')->find($id);
@@ -74,11 +68,13 @@ class ServicesController extends Controller
         return view('services.show', compact('service'));
     }
 
-    public function showJson($id){
+    public function showJson($id): JsonResponse
+    {
         $service = Services::find($id);
 
         return response()->json($service);
     }
+
 
     public function edit($id): View
     {
@@ -92,8 +88,16 @@ class ServicesController extends Controller
 
         return view('services.edit', compact('service', 'products', 'motos', 'users', 'productsSelected'));
     }
+    public function search(Request $request)
+    {
+        $query=$request->query('query');
+        $users=Services::where('user', 'like', '%' . $query . '%')->with('motos', 'users', 'products')->get();
 
-    public function update(Request $request, $id)
+        return view('services.byuser', compact('users'));
+//        return response()->json(['data' => $users]);
+    }
+
+    public function update(Request $request, $id): RedirectResponse
     {
         $id=Hashids::decode($id);
         $service=Services::find($id);
@@ -127,7 +131,7 @@ class ServicesController extends Controller
         return redirect()->route('services.index')->with('message', 'Service update Successfully');
     }
 
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $service = Services::find($id);
         $service->delete();

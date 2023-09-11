@@ -78,24 +78,6 @@
                         <span class="menu-title">Categorias</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    {{--                    <div class="submenu">--}}
-                    {{--                        <ul>--}}
-                    {{--                            <li class="nav-item">--}}
-                    {{--                                <a class="nav-link"--}}
-                    {{--                                   href="{{route('categories.store')}}">--}}
-                    {{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
-                    {{--                                    &nbsp;&nbsp;--}}
-                    {{--                                    Crear Categorias</a>--}}
-                    {{--                            </li>--}}
-                    {{--                            <li class="nav-item">--}}
-                    {{--                                <a class="nav-link"--}}
-                    {{--                                   href="{{route('categories.index')}}">--}}
-                    {{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
-                    {{--                                    &nbsp;&nbsp;--}}
-                    {{--                                    Ver Categorias</a>--}}
-                    {{--                            </li>--}}
-                    {{--                        </ul>--}}
-                    {{--                    </div>--}}
                 </li>
                 <li class="nav-item {{ Request::is('/motos') ? 'active' : ''}} {{ Request::is('/motos/*/show') ? 'active' : ''}}">
                     <a href="{{route('motos.index')}}" class="nav-link">
@@ -110,63 +92,13 @@
                         <span class="menu-title">Productos</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    {{--                    <div class="submenu">--}}
-                    {{--                        <ul>--}}
-                    {{--                            <li class="nav-item">--}}
-                    {{--                                <a class="nav-link"--}}
-                    {{--                                   href="{{route('categories.store')}}">--}}
-                    {{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
-                    {{--                                    &nbsp;&nbsp;--}}
-                    {{--                                    Crear Categorias</a>--}}
-                    {{--                            </li>--}}
-                    {{--                            <li class="nav-item">--}}
-                    {{--                                <a class="nav-link"--}}
-                    {{--                                   href="{{route('categories.index')}}">--}}
-                    {{--                                    <i class="mdi mdi-cube-outline menu-icon"></i>--}}
-                    {{--                                    &nbsp;&nbsp;--}}
-                    {{--                                    Ver Categorias</a>--}}
-                    {{--                            </li>--}}
-                    {{--                        </ul>--}}
-                    {{--                    </div>--}}
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{ url('/productos') }}" class="nav-link">--}}
-{{--                        <i class="mdi mdi-grid menu-icon"></i>--}}
-{{--                        <span class="menu-title">Tables</span>--}}
-{{--                        <i class="menu-arrow"></i>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
                 <li class="nav-item {{ Request::is('/servicios') ? 'active' : ''}}">
                     <a href="{{ route('services.index') }}" class="nav-link">
                         <i class="mdi mdi-notebook-outline"></i>
                         <span class="menu-title">Servicios</span>
                         <i class="menu-arrow"></i>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="mdi mdi-codepen menu-icon"></i>
-                        <span class="menu-title">Sample Pages</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="submenu">
-                        <ul class="submenu-item">
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/login-2.html">Login 2</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/register.html">Register</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/register-2.html">Register
-                                    2</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="pages/samples/lock-screen.html">Lockscreen</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="docs/documentation.html" class="nav-link">
-                        <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                        <span class="menu-title">Documentation</span></a>
                 </li>
             </ul>
         </div>

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Editar Motos')
+@section('title', 'Filtrar Motos')
 
 @section('content')
     <div class="container-scroller bg-black" id="body">
