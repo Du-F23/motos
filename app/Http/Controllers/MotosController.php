@@ -32,7 +32,7 @@ class MotosController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'year' => ['required'],
+            'year' => ['required', 'integer'],
             'model' => ['required', 'string'],
             'color' => ['required', 'string'],
             'hp' => ['required', 'string'],
@@ -139,26 +139,32 @@ class MotosController extends Controller
         return redirect()->route('motos.index')->with('success', 'Moto deleted successfully.');
     }
 
-    public function showByCategory($id, $year = null, $hps = null)
+    public function showByCategory($id, $year = null, $hp = null)
     {
         $motos = Motos::where('category_id', $id)->get();
 
-        if ($hps != null) {
-            $motos = Motos::where('category_id', $id)->where('year', $year)->where('hp', $hps)->get();
-//            return response()->json(['data' => $motos], 200);
+        if ($hp != null) {
+            $motos = Motos::where('category_id', $id)->where('year', $year)->where('hp', $hp)->get();
         } elseif ($year != null){
-            $motos = Motos::where('category_id', $id)->where('year', $year)->orWhere('hp', $year)->get();
-        }
-        $years = Motos::all(['year']);
-        $hp = Motos::all(['hp']);
-        if (!$motos->empty() === false) {
-            return view('motos.filtered', compact('motos', 'hp', 'years', 'id'));
+            $motos = Motos::where('category_id', $id)->where('year', $year)->get();
         }
 
-        $years = Motos::all(['year']);
-        $hp = Motos::all(['hp']);
-        return view('motos.filtered', compact('motos', 'hp', 'years'));
+        // Obtén todos los años de motos de la categoría seleccionada
+        $years = Motos::where('category_id', $id)->distinct()->pluck('year');
+
+        // Obtén todos los caballos de fuerza de motos de la categoría seleccionada
+        $hps = Motos::where('category_id', $id)->distinct()->pluck('hp');
+
+        if (!$motos->empty() === false) {
+            return view('motos.filtered', compact('motos', 'hps', 'years', 'id'));
+        }
+
+        // Si no hay motos para la categoría seleccionada, devuelve todos los años y caballos de fuerza
+        $years = Motos::distinct()->pluck('year');
+        $hps = Motos::distinct()->pluck('hp');
+        return view('motos.filtered', compact('motos', 'hps', 'years'));
     }
+
 
     public function showByCategoryJson($id)
     {

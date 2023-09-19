@@ -9,9 +9,9 @@
                 <select class="form-select"
                         aria-label="Seleccionar C.C de la Moto" name="hp" id="hp">
                     <option selected>Seleccione una opcion</option>
-                    @foreach($hp as $hp)
+                    @foreach($hps as $hp)
                         <option
-                            value="{{$hp->hp}}">{{$hp->hp}}</option>
+                            value="{{$hp}}">{{$hp}}</option>
                     @endforeach
                 </select>
             </div>
@@ -26,7 +26,7 @@
                     <option selected>Seleccione una opcion</option>
                     @foreach($years as $year)
                         <option
-                            value="{{$year->year}}">{{$year->year}}</option>
+                            value="{{$year}}">{{$year}}</option>
                     @endforeach
                 </select>
             </div>
